@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 30 Mar 2026, 15:50
--- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.1.12
+-- Generation Time: Apr 01, 2026 at 12:51 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `zegowska_szama`
+-- Database: `zegowska_szama`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `produkt`
+-- Table structure for table `produkt`
 --
 
 CREATE TABLE `produkt` (
@@ -39,7 +39,7 @@ CREATE TABLE `produkt` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `status`
+-- Table structure for table `status`
 --
 
 CREATE TABLE `status` (
@@ -48,7 +48,7 @@ CREATE TABLE `status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `status`
+-- Dumping data for table `status`
 --
 
 INSERT INTO `status` (`id`, `nazwa`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `status` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `uprawnienia`
+-- Table structure for table `uprawnienia`
 --
 
 CREATE TABLE `uprawnienia` (
@@ -69,7 +69,7 @@ CREATE TABLE `uprawnienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Zrzut danych tabeli `uprawnienia`
+-- Dumping data for table `uprawnienia`
 --
 
 INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
@@ -79,7 +79,7 @@ INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `uzytkownik`
+-- Table structure for table `uzytkownik`
 --
 
 CREATE TABLE `uzytkownik` (
@@ -95,7 +95,7 @@ CREATE TABLE `uzytkownik` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `zamowienie`
+-- Table structure for table `zamowienie`
 --
 
 CREATE TABLE `zamowienie` (
@@ -108,7 +108,7 @@ CREATE TABLE `zamowienie` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `zawartosc_zamowienia`
+-- Table structure for table `zawartosc_zamowienia`
 --
 
 CREATE TABLE `zawartosc_zamowienia` (
@@ -119,29 +119,29 @@ CREATE TABLE `zawartosc_zamowienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Indeksy dla zrzutów tabel
+-- Indexes for dumped tables
 --
 
 --
--- Indeksy dla tabeli `produkt`
+-- Indexes for table `produkt`
 --
 ALTER TABLE `produkt`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `status`
+-- Indexes for table `status`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `uprawnienia`
+-- Indexes for table `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `uzytkownik`
+-- Indexes for table `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
   ADD PRIMARY KEY (`id`),
@@ -150,7 +150,7 @@ ALTER TABLE `uzytkownik`
   ADD KEY `uprawnienia_id` (`uprawnienia_id`);
 
 --
--- Indeksy dla tabeli `zamowienie`
+-- Indexes for table `zamowienie`
 --
 ALTER TABLE `zamowienie`
   ADD PRIMARY KEY (`id`),
@@ -158,74 +158,76 @@ ALTER TABLE `zamowienie`
   ADD KEY `status_id` (`status_id`);
 
 --
--- Indeksy dla tabeli `zawartosc_zamowienia`
+-- Indexes for table `zawartosc_zamowienia`
 --
 ALTER TABLE `zawartosc_zamowienia`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `zamowienie_id` (`zamowienie_id`);
+  ADD KEY `zamowienie_id` (`zamowienie_id`),
+  ADD KEY `produkt_id` (`produkt_id`);
 
 --
--- AUTO_INCREMENT dla zrzuconych tabel
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT dla tabeli `produkt`
+-- AUTO_INCREMENT for table `produkt`
 --
 ALTER TABLE `produkt`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT dla tabeli `status`
+-- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `uprawnienia`
+-- AUTO_INCREMENT for table `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT dla tabeli `uzytkownik`
+-- AUTO_INCREMENT for table `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT dla tabeli `zamowienie`
+-- AUTO_INCREMENT for table `zamowienie`
 --
 ALTER TABLE `zamowienie`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT dla tabeli `zawartosc_zamowienia`
+-- AUTO_INCREMENT for table `zawartosc_zamowienia`
 --
 ALTER TABLE `zawartosc_zamowienia`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Ograniczenia dla zrzutów tabel
+-- Constraints for dumped tables
 --
 
 --
--- Ograniczenia dla tabeli `uzytkownik`
+-- Constraints for table `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
   ADD CONSTRAINT `uzytkownik_ibfk_1` FOREIGN KEY (`uprawnienia_id`) REFERENCES `uprawnienia` (`id`);
 
 --
--- Ograniczenia dla tabeli `zamowienie`
+-- Constraints for table `zamowienie`
 --
 ALTER TABLE `zamowienie`
   ADD CONSTRAINT `zamowienie_ibfk_1` FOREIGN KEY (`uzytkownik_id`) REFERENCES `uzytkownik` (`id`),
   ADD CONSTRAINT `zamowienie_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`);
 
 --
--- Ograniczenia dla tabeli `zawartosc_zamowienia`
+-- Constraints for table `zawartosc_zamowienia`
 --
 ALTER TABLE `zawartosc_zamowienia`
-  ADD CONSTRAINT `zawartosc_zamowienia_ibfk_1` FOREIGN KEY (`zamowienie_id`) REFERENCES `zamowienie` (`id`);
+  ADD CONSTRAINT `zawartosc_zamowienia_ibfk_1` FOREIGN KEY (`zamowienie_id`) REFERENCES `zamowienie` (`id`),
+  ADD CONSTRAINT `zawartosc_zamowienia_ibfk_2` FOREIGN KEY (`produkt_id`) REFERENCES `produkt` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
