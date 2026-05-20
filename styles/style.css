@@ -1,0 +1,55 @@
+header {
+    padding: 1rem 0;
+}
+
+#logo-image {
+    width: clamp(220px, 50vw, 800px);
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+nav {
+    gap: 15px;
+    padding: 12px 20px;
+}
+
+#admin-panel-button {
+    margin-right: auto;
+}
+
+.nav-button {
+    background: transparent;
+    border: none;
+
+    color: black;
+    padding: 5px;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    color: #FF4500;
+}
+
+.nav-button i {
+    font-size: 2rem;
+}
+
+footer {
+    background: black;
+}
+
+.sales-container, .products-container{
+    border: 1px black solid;
+    border-radius: 5px;
+    height: 100%;
+}
+

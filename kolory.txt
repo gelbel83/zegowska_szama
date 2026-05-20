@@ -1,0 +1,4 @@
+czarny, biały;
+
+żółty: #FFA500; 
+pomaranczowy: #FF4500;
