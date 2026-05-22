@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2026 at 12:51 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Maj 22, 2026 at 05:20 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produkt`
+-- Struktura tabeli dla tabeli `produkt`
 --
 
 CREATE TABLE `produkt` (
@@ -39,7 +39,7 @@ CREATE TABLE `produkt` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status`
+-- Struktura tabeli dla tabeli `status`
 --
 
 CREATE TABLE `status` (
@@ -60,7 +60,7 @@ INSERT INTO `status` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uprawnienia`
+-- Struktura tabeli dla tabeli `uprawnienia`
 --
 
 CREATE TABLE `uprawnienia` (
@@ -79,7 +79,7 @@ INSERT INTO `uprawnienia` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `uzytkownik`
+-- Struktura tabeli dla tabeli `uzytkownik`
 --
 
 CREATE TABLE `uzytkownik` (
@@ -92,10 +92,17 @@ CREATE TABLE `uzytkownik` (
   `uprawnienia_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `uzytkownik`
+--
+
+INSERT INTO `uzytkownik` (`id`, `login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES
+(1, 'admin', 'admin@zeg.pl', '5f58af6b2290f825c0fc5b04823f8bd18f2e784d', 'Konrad', 'Goliński', 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zamowienie`
+-- Struktura tabeli dla tabeli `zamowienie`
 --
 
 CREATE TABLE `zamowienie` (
@@ -108,7 +115,7 @@ CREATE TABLE `zamowienie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `zawartosc_zamowienia`
+-- Struktura tabeli dla tabeli `zawartosc_zamowienia`
 --
 
 CREATE TABLE `zawartosc_zamowienia` (
@@ -119,29 +126,29 @@ CREATE TABLE `zawartosc_zamowienia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Indexes for dumped tables
+-- Indeksy dla zrzutów tabel
 --
 
 --
--- Indexes for table `produkt`
+-- Indeksy dla tabeli `produkt`
 --
 ALTER TABLE `produkt`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `status`
+-- Indeksy dla tabeli `status`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `uprawnienia`
+-- Indeksy dla tabeli `uprawnienia`
 --
 ALTER TABLE `uprawnienia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `uzytkownik`
+-- Indeksy dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
   ADD PRIMARY KEY (`id`),
@@ -150,7 +157,7 @@ ALTER TABLE `uzytkownik`
   ADD KEY `uprawnienia_id` (`uprawnienia_id`);
 
 --
--- Indexes for table `zamowienie`
+-- Indeksy dla tabeli `zamowienie`
 --
 ALTER TABLE `zamowienie`
   ADD PRIMARY KEY (`id`),
@@ -158,7 +165,7 @@ ALTER TABLE `zamowienie`
   ADD KEY `status_id` (`status_id`);
 
 --
--- Indexes for table `zawartosc_zamowienia`
+-- Indeksy dla tabeli `zawartosc_zamowienia`
 --
 ALTER TABLE `zawartosc_zamowienia`
   ADD PRIMARY KEY (`id`),
@@ -191,7 +198,7 @@ ALTER TABLE `uprawnienia`
 -- AUTO_INCREMENT for table `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `zamowienie`

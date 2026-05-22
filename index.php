@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $mysql = mysqli_connect("localhost", "root", '', "zegowska_szama");
+    require_once('.\php\functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@
             const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
         </script>
 
-        <script src="src/popups.js" defer></script>
+        <script src="js/popups.js" defer></script>
     </head>
     
     <body class="d-flex flex-column">
@@ -39,7 +39,11 @@
 
             <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
             <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
-            <a href="#" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
+            <a href="<?php if(isset($_SESSION['user'])) {
+                echo "/konto";
+            }else{
+                echo "$host/";
+                }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
             <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
 
@@ -69,25 +73,37 @@
             <form method="post">
                 <div class="form-group m-3">
                     <label for="login-email" class="m-1">Login lub e-mail</label>
-                    <input type="text" class="form-control m-1 email-input" name="login-email" required />
+                    <input type="text" class="form-control m-1 " name="login-email" required />
                 </div>
 
                 <div class="form-group m-3">
-                    <label for="password" class="m-1">Hasło</label>
-                    <input type="password" class="form-control m-1 password-input" name="password" required />
+                    <label for="passwd" class="m-1">Hasło</label>
+                    <input type="password" class="form-control m-1 " name="passwd" required />
                 </div>
 
                 <div class="form-group m-3">
                     <span>Nie masz konta? Zarejestruj się <span class="show-popup-text" id="show-register-popup-span">tutaj!</span></span>
                 </div>
 
-                <div class="d-flex align-items-center justify-content-center"><button type="submit" id="login-button" name="login" class="btn w-75">Zaloguj</button></div>
+                <div class="d-flex align-items-center justify-content-center"><button type="submit" id="login-button" name="login-button" class="btn w-75">Zaloguj</button></div>
             </form>
+            <?php 
+                if(isset($_POST['login-button'])){
+                    $login_email = $_POST['login-email'];
+                    $passwd = $_POST['passwd'];
+                    
+                    if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
+                        $email = $login_email;
+                        sprawdz_logowanie($email);
+                    }
+                    else{
+                        sprawdz_logowanie($login_email);
+                    }
+                }
+            ?>
         </div>
+       
 
-        <?php
-
-        ?>
 
         <div id="register-popup" class="popup hidden w-25 p-4">
             <form method="post">
@@ -102,13 +118,13 @@
                 </div>
 
                 <div class="form-group m-3">
-                    <label for="password" class="m-1">Hasło</label>
-                    <input type="password" class="form-control m-1" name="password" required />
+                    <label for="passwd" class="m-1">Hasło</label>
+                    <input type="password" class="form-control m-1" name="passwd" required />
                 </div>
 
                 <div class="form-group m-3">
-                    <label for="repeat-password" class="m-1">Powtórz hasło</label>
-                    <input type="password" class="form-control m-1" name="repeat-password" required />
+                    <label for="repeat-passwd" class="m-1">Powtórz hasło</label>
+                    <input type="password" class="form-control m-1" name="repeat-passwd" required />
                 </div>
 
                 <div class="form-group m-3">
@@ -125,14 +141,24 @@
                     <span>Masz już konto? Zaloguj się <span class="show-popup-text" id="show-login-popup-span">tutaj!</span></span>
                 </div>
 
-                <div class="d-flex align-items-center justify-content-center"><button type="submit" id="register-button" name="register" class="btn w-75">Zarejestruj</button></div>
+                <div class="d-flex align-items-center justify-content-center"><button type="submit" id="register-button" name="register-button" class="btn w-75">Zarejestruj</button></div>
             </form>
+            <?php 
+                $query = "INSERT INTO `uzytkownik`(`login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES (?, ?, ?, ?, ?, 1)";
+                if(isset($_POST['register-button'])){
+                    $login = $_POST['login'];
+                    $email = $_POST['email'];
+                    $passwd = $_POST['passwd'];
+                    $repeat_passwd = $_POST['repeat-passwd'];
+                    $name = $_POST['name'];
+                    $surname = $_POST['surname'];
+                    
+                    mysqli_change_values($query, array($login, $email, $passwd, $name, $surname), 5);
+                }
+            ?>
         </div>
     </body>
 </html>
 
-<?php
-    mysqli_close($mysql);
-?>
 
 
