@@ -18,17 +18,14 @@ function mysqli_select_values($query, $values_arr, $parameters_num) {
     global $charset;
 
     if (strlen($query) < 3) {
-        echo "dupa1";
         return false;
     }
 
     if (!isset($parameters_num) || !is_numeric($parameters_num) || $parameters_num < 1) {
-        echo "dupa2";
         return false;
     }
 
     if (!isset($values_arr) || !is_array($values_arr) || sizeof($values_arr) == 0 || sizeof($values_arr) != $parameters_num) {
-        echo "dupa3";
         return false;
     }
     try {
@@ -43,7 +40,6 @@ function mysqli_select_values($query, $values_arr, $parameters_num) {
 
     catch(PDOException $e) {
         $_SESSION['dbError'] = $e->getMessage();
-        echo "dupa4";
         echo $e;
         return false;
     }
@@ -82,13 +78,14 @@ function mysqli_change_values($query, $values_arr, $parameters_num){
     }
 }
 
-function sprawdz_logowanie($login){
+function check_login($login){
     $query = "SELECT * FROM uzytkownik WHERE login LIKE(?) OR email LIKE(?);";
     $users_arr = mysqli_select_values($query, array(trim($login), trim($login)), 2);
     if(empty($users_arr)){
         return false;
     }else{
         $_SESSION['user'] = $users_arr[0]['login'];
+        $_SESSION['user_type'] = $users_arr[0]['uprawnienia_id'];
         return true;
     }
 };

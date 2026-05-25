@@ -35,7 +35,9 @@
         </header>
         
         <nav class="d-flex align-items-center justify-content-start">
-            <button id="admin-panel-button" class="btn">Panel administratora</button>
+            <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type']==1 ){
+                echo "display:none;";
+                }?>" >Panel administratora</button>
 
             <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
             <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
@@ -94,10 +96,10 @@
                     
                     if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
                         $email = $login_email;
-                        sprawdz_logowanie($email);
+                        check_login($email);
                     }
                     else{
-                        sprawdz_logowanie($login_email);
+                        check_login($login_email);
                     }
                 }
             ?>
