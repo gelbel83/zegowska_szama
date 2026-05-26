@@ -1,8 +1,6 @@
 <?php
     session_start();
     require_once('.\php\functions.php');
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +27,7 @@
         </script>
 
         <script src="js/popups.js" defer></script>
-        <script src="js/scroll.js defer"></script>
+        <script src="js/scroll.js" defer></script>
     </head>
     
     <body class="d-flex flex-column">
@@ -51,27 +49,48 @@
                 }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
             <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
-        
-        <section class="sales-section d-flex flex-column p-3">
+    
+        <section class="sales-section d-flex flex-column p-3 <?php if (!isset($_SESSION['user'])){echo "hidden";}?>">
             <h3>Po taniości</h3>
                 <div>
-                    <button class="scroll-btn btn-left" onclick="scrollContainer(-300)">&#10094;</button>
-                    <button class="scroll-btn btn-right" onclick="scrollContainer(300)">&#10095;</button>
-
-                    <div id="product-scroll-container" class="d-flex flex-nowrap gap-3 overflow-auto p-2" style="scroll-behavior: smooth;">
-                        <div class="product-card card flex-row p-3 align-items-center justify-content-between shadow-sm">
-                            <div class="d-flex flex-column align-items-center w-50 pe-2">
-                                <h3 class="fw-bold mb-2">Buła</h3>
-                                <img src="/resources/produkty/bulki/ser.jpg" class="img-fluid rounded" style="max-height: 100px; object-fit: cover;" />
-                            </div>
-                            
-                            <div class="d-flex flex-column align-items-center w-50 ps-2 border-start">
-                                <span class="badge mb-1 fs-6">-20%</span>
-                                <h2 class="fw-bold text-dark mb-3">6.90 zł</h2>
-                                <button class="btn w-100 fw-semibold btn-sm">Do koszyka</button>
-                            </div>
-                        </div>
+                    <button class="scroll-btn btn-left" onclick="scrollContainer(-(document.getElementById('product-scroll-container').style.width/2))">&#10094;</button>
+                    <button class="scroll-btn btn-right" onclick="scrollContainer((document.getElementById('product-scroll-container').style.width/2))">&#10095;</button>
+                    <div id='product-scroll-container' class='d-flex flex-nowrap gap-3 overflow-auto p-2' style='scroll-behavior: smooth;'>
+                    <?php 
+                        $sales_sql = "SELECT * FROM produkt WHERE promocja > 0;";
+                        $sales_arr = mysqli_select_no_parameters($sales_sql);
+                        if($sales_arr != null){
+                            foreach($sales_arr as $sale){
+                                echo "<div class='product-card card flex-row p-3 align-items-center justify-content-between shadow-sm'>
+                                    <div class='d-flex flex-column align-items-center w-50 pe-2'>
+                                        <h3 class='fw-bold mb-2'>";
+                                        
+                                echo $sale['nazwa'];
+                                echo "</h3>
+                                        <img src='/resources/produkty/bulki/";
+                                echo $sale['zdjecie'];
+                                        echo "' class='img-fluid rounded' style='max-height: 100px; object-fit: cover;' />
+                                    </div>
+                                    
+                                    <div class='d-flex flex-column align-items-center w-50 ps-2 border-start'>
+                                        <span class='badge mb-1 fs-6'>";
+                                        echo floatval($sale['promocja'])*100 . '%'; 
+                                        echo "</span>
+                                        <h2 class='fw-bold text-dark mb-3'>";
+                                        echo floatval($sale['cena']) . 'zł'; 
+                                        echo "</h2>
+                                        <button class='btn w-100 fw-semibold btn-sm'>Do koszyka</button>
+                                    </div>
+                                </div>";
+                            }
+                        }
+                        else{
+                                echo "<h4> Brak promocji </h4>";
+                            }
+                      
+                    ?>
                     </div>
+                   
                 </div>
         </section>
 
@@ -82,7 +101,7 @@
             </div>
         </section>
 
-        <footer class='w-100 d-flex align-items-center justify-content-center my-3'>
+        <footer class='w-100 d-flex align-items-center justify-content-center my-3 flex-column flex-md-row'>
             <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
             <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
             <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
@@ -120,7 +139,9 @@
                     else{
                         check_login($login_email);
                     }
+                    
                 }
+                
             ?>
         </div>
        

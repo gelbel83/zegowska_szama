@@ -24,7 +24,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="../style.css" type="text/css" />
-        <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="../resources/favicon.ico" type="image/x-icon" />
 
         <script>
             const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
@@ -59,6 +59,18 @@
                     echo $account_info['email'];
                 ?>
             </p>
+            <!-- gunk ogarnij style tego -->
+            <button onclick="window.location.href = '?akcja=wyloguj'" class="w-50 m-auto mt-1 ">Wyloguj</button>
+            <?php 
+                if(isset( $_GET['akcja'])){
+                    $akcja = $_GET['akcja'];
+                    if($akcja == 'wyloguj'){
+                        session_destroy();
+                        header("Location: /");
+                    }
+                }
+               
+            ?>
         </main>
         <?php create_footer();?>
 

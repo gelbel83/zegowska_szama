@@ -45,6 +45,33 @@ function mysqli_select_values($query, $values_arr, $parameters_num) {
     }
 }
 
+function mysqli_select_no_parameters($query) {
+    global $dbname;
+    global $dbhost;
+    global $dbusername;
+    global $dbpassword;
+    global $charset;
+
+    if (strlen($query) < 3) {
+        return false;
+    }
+
+    try {
+        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname;charset=$charset;", $dbusername, $dbpassword);
+        $stmt = $dbh->prepare($query);
+        $result = $stmt->execute();
+        $rows = $stmt->fetchAll();
+        if (count($rows) > 0) {
+            return $rows;
+        }
+    }
+
+    catch(PDOException $e) {
+        $_SESSION['dbError'] = $e->getMessage();
+        echo $e;
+        return false;
+    }
+}
 
 function mysqli_change_values($query, $values_arr, $parameters_num){
     global $dbname;
@@ -84,8 +111,10 @@ function check_login($login){
     if(empty($users_arr)){
         return false;
     }else{
+        
         $_SESSION['user'] = $users_arr[0]['login'];
         $_SESSION['user_type'] = $users_arr[0]['uprawnienia_id'];
+        echo "<script>window.location.href='/';</script>";
         return true;
     }
 };

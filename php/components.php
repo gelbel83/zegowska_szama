@@ -1,6 +1,9 @@
 <?php 
 require_once("../php/functions.php");
 function create_header(){
+    if (!isset($_SESSION['user'])){
+        header("Location: /");
+    }
     echo "<header class='w-100 d-flex align-items-center justify-content-center my-3'>
             <a href='/'><img src='../resources/logo.gif' alt='ZEGOWSKA SZAMA' id='logo-image'/></a>
         </header>
@@ -27,7 +30,7 @@ function create_header(){
 }
 
 function create_footer(){
-        echo "<footer class='w-100 d-flex align-items-center justify-content-center my-3'>
+        echo "<footer class='w-100 d-flex align-items-center justify-content-center my-3 flex-column flex-md-row'>
             <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
             <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
             <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
