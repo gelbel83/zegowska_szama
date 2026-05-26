@@ -32,9 +32,9 @@
 
     </head>
     
-    <body class="d-flex flex-column">
+    <body class="d-flex flex-column vh-100">
         <?php create_header();?>
-        <main class='card text-center'>
+        <main class='card text-center flex-fill'>
             <p>
                 <h5>Login </h5>
                 <?php 
@@ -59,7 +59,6 @@
                     echo $account_info['email'];
                 ?>
             </p>
-            <a href="/"><button>Powrót do strony głównej</button></a>
         </main>
         <?php create_footer();?>
 

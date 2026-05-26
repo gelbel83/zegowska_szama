@@ -19,7 +19,7 @@
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Podkova:wght@400..800&display=swap" rel="stylesheet" />
 
         <link rel="stylesheet" href="./style.css" type="text/css" />
         <link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon" />
@@ -29,6 +29,7 @@
         </script>
 
         <script src="js/popups.js" defer></script>
+        <script src="js/scroll.js defer"></script>
     </head>
     
     <body class="d-flex flex-column">
@@ -50,13 +51,28 @@
                 }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
             <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
+        
         <section class="sales-section d-flex flex-column p-3">
             <h3>Po taniości</h3>
-            <div class="sales-containers">
-                <div class="sales-container">
-                    
+                <div>
+                    <button class="scroll-btn btn-left" onclick="scrollContainer(-300)">&#10094;</button>
+                    <button class="scroll-btn btn-right" onclick="scrollContainer(300)">&#10095;</button>
+
+                    <div id="product-scroll-container" class="d-flex flex-nowrap gap-3 overflow-auto p-2" style="scroll-behavior: smooth;">
+                        <div class="product-card card flex-row p-3 align-items-center justify-content-between shadow-sm">
+                            <div class="d-flex flex-column align-items-center w-50 pe-2">
+                                <h3 class="fw-bold mb-2">Buła</h3>
+                                <img src="/resources/produkty/bulki/ser.jpg" class="img-fluid rounded" style="max-height: 100px; object-fit: cover;" />
+                            </div>
+                            
+                            <div class="d-flex flex-column align-items-center w-50 ps-2 border-start">
+                                <span class="badge mb-1 fs-6">-20%</span>
+                                <h2 class="fw-bold text-dark mb-3">6.90 zł</h2>
+                                <button class="btn w-100 fw-semibold btn-sm">Do koszyka</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </section>
 
         <section class="d-flex flex-column p-3">
@@ -146,6 +162,7 @@
 
                 <div class="d-flex align-items-center justify-content-center"><button type="submit" id="register-button" name="register-button" class="btn w-75">Zarejestruj</button></div>
             </form>
+
             <?php 
                 $query = "INSERT INTO `uzytkownik`(`login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES (?, ?, ?, ?, ?, 1)";
                 if(isset($_POST['register-button'])){
@@ -159,7 +176,6 @@
                     mysqli_change_values($query, array($login, $email, $passwd, $name, $surname), 5);
                 }
             ?>
-           
         </div>
     </body>
 </html>
