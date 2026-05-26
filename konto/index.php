@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once('..\php\functions.php');
+    global $host;
 
     $account_info_query = "SELECT * FROM uzytkownik WHERE login LIKE(?)";
     $account_info = mysqli_select_values($account_info_query, array($_SESSION['user']), 1) [0];

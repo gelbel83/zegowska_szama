@@ -1,18 +1,3 @@
-:root {
-    --bg: #ffffff;
-    --surface: #f7f7f7;
-
-    --orange: #ff6b00;
-    --orange-hover: #ff8124;
-
-    --secondary: #ffd2b3;
-
-    --text: #1a1a1a;
-    --text-muted: #666666;
-
-    --border: #e5e5e5;
-}
-
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg);
@@ -33,26 +18,27 @@ img {
 nav {
     gap: 15px;
     padding: 16px 24px;
+    background-color: whitesmoke;
 
-    background-color: var(--surface);
-    border-bottom: 1px solid var(--border);
-    border-top: 1px solid var(--border);
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
+
 
 #admin-panel-button {
     margin-right: auto;
 
-    background-color: var(--orange);
+    background-color: #FF3300;
     color: white;
-
     border: none;
+
     font-weight: 600;
 
     transition: 0.2s;
 }
 
 #admin-panel-button:hover {
-    background-color: var(--orange-hover);
+    background-color: #FF5C33;
     transform: translateY(-1px);
 }
 
@@ -60,7 +46,7 @@ nav {
     background: transparent;
     border: none;
 
-    color: var(--text);
+    color: black;
     padding: 5px;
 
     cursor: pointer;
@@ -68,7 +54,7 @@ nav {
 }
 
 .nav-link:hover {
-    color: var(--orange);
+    color: #FF3300;
 }
 
 .nav-link i {
@@ -81,7 +67,7 @@ section h3 {
 
 .sales-container,
 .products-container {
-    background-color: var(--surface);
+    background-color: whitesmoke;
     border: 1px solid var(--border);
     border-radius: 12px;
     height: 100%;
@@ -89,25 +75,24 @@ section h3 {
     box-shadow: 0 0 10px rgba(0,0,0,0.08);
 }
 
-
 .popup {
     position:fixed;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     transform:translate(-50%, -50%);
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.3);
+
+    background: white;
+    padding: 20px;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
     z-index:9999;
 }
 
-.hidden {
-    display: none;
-}
 
 #login-button, #register-button {
-    background-color: var(--orange);
+    background-color: #FF3300;
     color: white;
 
     border: none;
@@ -116,17 +101,28 @@ section h3 {
     transition: 0.2s;
 }
 
+#login-button:hover, #register-button:hover {
+    background-color:  #FF5C33;
+    transform: translateY(-1px);
+}
+
+
+
 .form-control:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 0.25rem var(--secondary);
+    border-color: #FF3300;
+    box-shadow: 0 0 0 0.25rem #FF5C33;
 }
 
 .show-popup-text{
-    color: var(--orange);
+    color: #FF3300;
     text-decoration: underline;
     cursor: pointer;
 } 
 
 .show-popup-text:hover {
-    color: var(--orange-hover);
+    color: #FF5C33;
+}
+
+.hidden {
+    display: none;
 }

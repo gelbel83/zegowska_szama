@@ -1,6 +1,8 @@
 <?php
     session_start();
     require_once('.\php\functions.php');
+    
+    global $host;
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +36,8 @@
             <img src="resources/logo.gif" alt="ZEGOWSKA SZAMA" id="logo-image"/>
         </header>
         
-        <nav class="d-flex align-items-center justify-content-start">
-            <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type']==1 ){
+        <nav class="d-flex align-items-center justify-content-end">
+            <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo "display:none;";
                 }?>" >Panel administratora</button>
 
@@ -105,8 +107,6 @@
             ?>
         </div>
        
-
-
         <div id="register-popup" class="popup hidden w-25 p-4">
             <form method="post">
                 <div class="form-group m-3">
@@ -161,6 +161,3 @@
         </div>
     </body>
 </html>
-
-
-
