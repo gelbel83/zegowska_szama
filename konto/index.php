@@ -1,7 +1,7 @@
 <?php
     session_start();
     require_once('..\php\functions.php');
-    global $host;
+    require_once('..\php\components.php');
 
     $account_info_query = "SELECT * FROM uzytkownik WHERE login LIKE(?)";
     $account_info = mysqli_select_values($account_info_query, array($_SESSION['user']), 1) [0];
@@ -33,24 +33,7 @@
     </head>
     
     <body class="d-flex flex-column">
-        <header class="w-100 d-flex align-items-center justify-content-center my-3">
-            <img src="../resources/logo.gif" alt="ZEGOWSKA SZAMA" id="logo-image"/>
-        </header>
-        
-        <nav class="d-flex align-items-center justify-content-start">
-            <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type']==1 ){
-                echo "display:none;";
-                }?>" >Panel administratora</button>
-
-            <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
-            <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
-            <a href="<?php if(isset($_SESSION['user'])) {
-                echo "/konto";
-            }else{
-                echo "$host/";
-                }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
-            <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
-        </nav>
+        <?php create_header();?>
         <main class='card text-center'>
             <p>
                 <h5>Login </h5>
@@ -78,10 +61,7 @@
             </p>
             <a href="/"><button>Powrót do strony głównej</button></a>
         </main>
-
-        <footer class="w-100 d-flex align-items-center justify-content-center my-3">
-            <p class="m-0">siema tu stopka</p>
-        </footer>
+        <?php create_footer();?>
 
         </div>
     </body>

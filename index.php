@@ -1,8 +1,8 @@
 <?php
     session_start();
     require_once('.\php\functions.php');
+
     
-    global $host;
 ?>
 
 <!DOCTYPE html>
@@ -46,11 +46,10 @@
             <a href="<?php if(isset($_SESSION['user'])) {
                 echo "/konto";
             }else{
-                echo "$host/";
+                echo "javascript:void(0);";
                 }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
             <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
-
         <section class="sales-section d-flex flex-column p-3">
             <h3>Po taniości</h3>
             <div class="sales-containers">
@@ -67,8 +66,10 @@
             </div>
         </section>
 
-        <footer class="w-100 d-flex align-items-center justify-content-center my-3">
-            <p class="m-0">siema tu stopka</p>
+        <footer class='w-100 d-flex align-items-center justify-content-center my-3'>
+            <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
+            <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
+            <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
         </footer>
 
         <!--popupy-->
@@ -158,6 +159,7 @@
                     mysqli_change_values($query, array($login, $email, $passwd, $name, $surname), 5);
                 }
             ?>
+           
         </div>
     </body>
 </html>
