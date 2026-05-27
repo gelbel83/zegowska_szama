@@ -50,7 +50,7 @@
             ?>
             <div class="users-div"> 
                 <?php 
-                    $users_sql = 
+                    $users_sql = "";
                 ?>
             </div>
             <?php endif;?>
