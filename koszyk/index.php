@@ -34,47 +34,8 @@
     
     <body class="d-flex flex-column vh-100">
         <?php create_header();?>
-        <main class='card text-center flex-fill'>
-            <p>
-                <h5>Login </h5>
-                <?php 
-                    echo $account_info['login'];
-                ?>
-            </p>
-            <p>
-                <h5>Imie </h5>
-                <?php 
-                    echo $account_info['imie'];
-                ?>
-            </p>
-            <p>
-                <h5>Nazwisko </h5>
-                <?php 
-                    echo $account_info['nazwisko'];
-                ?>
-            </p>
-            <p>
-                <h5>email </h5>
-                <?php 
-                    echo $account_info['email'];
-                ?>
-            </p>
-            <!-- gunk ogarnij style tego -->
-            <button onclick="window.location.href = '?akcja=wyloguj'" class="w-50 m-auto mt-1 ">Wyloguj</button>
-            <?php 
-                if(isset( $_GET['akcja'])){
-                    $akcja = $_GET['akcja'];
-                    if($akcja == 'wyloguj'){
-                        session_destroy();
-                        header("Location: /");
-                    }
-                }
-               
-            ?>
-        </main>
+        
         <?php create_footer();?>
-
-        </div>
     </body>
 </html>
 

@@ -31,7 +31,7 @@
     </head>
     
     <body class="d-flex flex-column">
-        <header class="w-100 d-flex align-items-center justify-content-center my-3">
+        <header class="w-100 d-flex align-items-center justify-content-center my-3 px-3">
             <img src="resources/logo.gif" alt="ZEGOWSKA SZAMA" id="logo-image"/>
         </header>
         
@@ -52,44 +52,44 @@
         <?php if (isset($_SESSION['user'])): ?>
         <section class="sales-section d-flex flex-column p-3 ">
             <h3>Po taniości</h3>
-                <div>
-                    <button class="scroll-btn btn-left" onclick="scrollContainer(-(document.getElementById('product-scroll-container').style.width/2))">&#10094;</button>
-                    <button class="scroll-btn btn-right" onclick="scrollContainer((document.getElementById('product-scroll-container').style.width/2))">&#10095;</button>
-                    <div id='product-scroll-container' class='d-flex flex-nowrap gap-3 overflow-auto p-2' style='scroll-behavior: smooth;'>
-                    <?php 
-                        $sales_sql = "SELECT * FROM produkt WHERE promocja > 0;";
-                        $sales_arr = mysqli_select_no_parameters($sales_sql);
-                        if($sales_arr != null){
-                            foreach($sales_arr as $sale){
-                                echo "<div class='product-card card flex-row p-3 align-items-center justify-content-between shadow-sm'>
+            <div>
+                <button class="scroll-btn btn-left" onclick="scrollContainer(-(document.getElementById('product-scroll-container').style.width/2))">&#10094;</button>
+                <button class="scroll-btn btn-right" onclick="scrollContainer((document.getElementById('product-scroll-container').style.width/2))">&#10095;</button>
+                <div id='product-scroll-container' class='d-flex flex-nowrap gap-3 overflow-auto p-2' style='scroll-behavior: smooth;'>
+                <?php 
+                    $sales_sql = "SELECT * FROM produkt WHERE promocja > 0;";
+                    $sales_arr = mysqli_select_no_parameters($sales_sql);
+                    if($sales_arr != null){
+                        foreach($sales_arr as $sale){
+                            echo "<div class='product-card card flex-row p-3 align-items-center justify-content-between shadow-sm'>
                                     <div class='d-flex flex-column align-items-center w-50 pe-2'>
                                         <h3 class='fw-bold mb-2'>";
-                                        
-                                echo $sale['nazwa'];
-                                echo "</h3>
+                                    
+                            echo $sale['nazwa'];
+                            echo "</h3>
                                         <img src='/resources/produkty/bulki/";
-                                echo $sale['zdjecie'];
-                                        echo "' class='img-fluid rounded' style='max-height: 100px; object-fit: cover;' />
+                            echo $sale['zdjecie'];
+                            echo "' class='img-fluid rounded' style='max-height: 100px; object-fit: cover;' />
                                     </div>
                                     
                                     <div class='d-flex flex-column align-items-center w-50 ps-2 border-start'>
                                         <span class='badge mb-1 fs-6'>";
-                                        echo floatval($sale['promocja'])*100 . '%'; 
-                                        echo "</span>
+                            echo floatval($sale['promocja'])*100 . '%'; 
+                            echo "</span>
                                         <h2 class='fw-bold text-dark mb-3'>";
-                                        echo floatval($sale['cena']) . 'zł'; 
-                                        echo "</h2>
+                            echo floatval($sale['cena']) . 'zł'; 
+                            echo "</h2>
                                         <button class='btn w-100 fw-semibold btn-sm'>Do koszyka</button>
                                     </div>
                                 </div>";
-                            }
                         }
-                        else {
-                            echo "<h4> Brak promocji </h4>";
-                        }
-                    ?>
-                    </div>
+                    }
+                    else {
+                        echo "<h4> Brak promocji </h4>";
+                    }
+                ?>
                 </div>
+            </div>
         </section>
         <?php endif; ?>
         <section class="d-flex flex-column p-3">
@@ -105,9 +105,7 @@
             <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
         </footer>
 
-        <!--popupy-->
-
-        <div id="login-popup" class="popup hidden w-25 p-4">
+        <div id="login-popup" class="popup hidden p-4">
             <form method="post">
                 <div class="form-group m-3">
                     <label for="login-email" class="m-1">Login lub e-mail</label>
@@ -141,7 +139,7 @@
             ?>
         </div>
        
-        <div id="register-popup" class="popup hidden w-25 p-4">
+        <div id="register-popup" class="popup hidden p-4">
             <form method="post">
                 <div class="form-group m-3">
                     <label for="login" class="m-1">Login</label>
