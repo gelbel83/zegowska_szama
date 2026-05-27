@@ -34,16 +34,15 @@ function create_header($is_index = false){
             <a href='/'><img src='{$path_dots}/resources/logo.gif' alt='ZEGOWSKA SZAMA' id='logo-image'/></a>
         </header>
         
-        <nav class='d-flex align-items-center justify-content-end'>
-            <button id='admin-panel-button' class='btn' onclick='window.location.href =`/admin`' style='";
-            if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
-                echo 'display:none;';
+        <nav class='d-flex align-items-center justify-content-end'>";
+            if((isset($_SESSION['user_type']) && $_SESSION['user_type'] == 2)  ){
+            echo "<button id='admin-panel-button' class='btn' onclick='window.location.href =`/admin`'>Panel administratora</button>";
             }
-            echo "' >Panel administratora</button>
-
-            <a href='/zamowienia' class='nav-link'><i class='bi bi-receipt'></i></a>
-            <a href='/koszyk' class='nav-link'><i class='bi bi-cart'></i></a>
-            <a href='";
+            if (isset($_SESSION['user'])){
+                echo "<a href='/zamowienia' class='nav-link'><i class='bi bi-receipt'></i></a>
+                <a href='/koszyk' class='nav-link'><i class='bi bi-cart'></i></a>";
+            }
+            echo "<a href='";
             if(isset($_SESSION['user'])) {
                 echo '/konto';
             }else{
