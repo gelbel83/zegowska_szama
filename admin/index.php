@@ -30,9 +30,62 @@
             <?php 
               if ((isset($_GET['page']) && $_GET['page']=='users') || !isset($_GET['page'])): 
             ?>
-            <div class="users-div"> 
+            <div class="users-div d-flex" > 
                 <?php 
-                    $users_sql = "";
+                    $users_sql = "SELECT * FROM uzytkownik";
+                    $users_arr = mysqli_select_no_parameters($users_sql);
+                    if(!empty($users_arr)){
+                        foreach($users_arr as $user){
+                            echo "<div class='user card'>";
+                            echo "Login: ";
+                            echo $user['login'];
+                            echo "<br>";
+                            echo "Email: ";
+                            echo $user['email'];
+                            echo "<br>";
+                            echo "Imię: ";
+                            echo $user['imie'];
+                            echo "<br>";
+                            echo "Nazwisko: ";
+                            echo $user['nazwisko'];
+                            echo "<br>";
+                           
+                            
+                            echo "Typ użytkownika: ";
+                            if($user['uprawnienia_id'] == 2){
+                                echo "administrator";
+                            }
+                            else{
+                                echo "użytkownik";
+                            }
+                            echo "<button>Zmień</button>";
+                            echo "<button>Usuń</button>";
+                            echo "</div>";
+                        }
+                    }
+                    else{
+                        echo "<h3> Brak danych </h3>";
+                    }
+                ?>
+            </div>
+            <?php endif;?>
+             <?php 
+              if ((isset($_GET['page']) && $_GET['page']=='products')): 
+            ?>
+            <div class="products-div"> 
+                <?php 
+                    $users_sql = "SELECT * FROM uzytkownik";
+                    
+                ?>
+            </div>
+            <?php endif;?>
+             <?php 
+              if ((isset($_GET['page']) && $_GET['page']=='orders')): 
+            ?>
+            <div class="orders-div"> 
+                <?php 
+                    $users_sql = "SELECT * FROM uzytkownik";
+                    
                 ?>
             </div>
             <?php endif;?>
