@@ -25,7 +25,6 @@ function create_header(){
                 echo "javascript:void(0);"; 
                 }
             echo "' id='konto-link' class='nav-link'><i class='bi bi-person-circle'></i></a>
-            <a href='/ustawienia' class='nav-link'><i class='bi bi-gear'></i></a>
         </nav>";
 }
 

@@ -39,15 +39,15 @@
             <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo "display:none;";
                 }?>" >Panel administratora</button>
-
+            <?php if (isset($_SESSION['user'])): ?>
             <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
             <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
+            <?php endif;?>
             <a href="<?php if(isset($_SESSION['user'])) {
                 echo "/konto";
             }else{
                 echo "javascript:void(0);";
                 }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
-            <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
         <?php if (isset($_SESSION['user'])): ?>
         <section class="sales-section d-flex flex-column p-3 ">
