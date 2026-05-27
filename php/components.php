@@ -9,7 +9,7 @@ function create_header(){
         </header>
         
         <nav class='d-flex align-items-center justify-content-end'>
-            <button id='admin-panel-button' class='btn' style='";
+            <button id='admin-panel-button' class='btn' onclick='window.location.href =`/admin`' style='";
             if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo 'display:none;';
                 }
