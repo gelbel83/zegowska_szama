@@ -30,10 +30,10 @@ function create_header(){
 }
 
 function create_footer(){
-        echo "<footer class='w-100 d-flex align-items-center justify-content-center flex-row'>
-            <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
-            <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
-            <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
-        </footer>";
+    echo "<footer class='w-100 d-flex align-items-center justify-content-center flex-row'>
+        <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
+        <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
+        <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
+    </footer>";
 }
 ?>

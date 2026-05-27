@@ -11,32 +11,37 @@ img {
 }
 
 #logo-image {
-    width: clamp(220px, 50vw, 800px);
+    width: 85%; 
+    max-width: 450px;
     display: block;
     object-fit: contain;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    #logo-image {
+        width: 50vw;
+        max-width: 800px;
+    }
 }
 
 nav {
     gap: 15px;
     padding: 16px 24px;
-
-    border-bottom: 1px solid lightgray;
 }
 
 nav, footer {
     background-color: whitesmoke;
     border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 #admin-panel-button {
     margin-right: auto;
-
     background-color: #FF3300;
     color: white;
     border: none;
-
     font-weight: 600;
-
     transition: 0.2s;
 }
 
@@ -48,10 +53,8 @@ nav, footer {
 .nav-link {
     background: transparent;
     border: none;
-
     color: black;
     padding: 5px;
-
     cursor: pointer;
     transition: 0.25s;
 }
@@ -68,30 +71,27 @@ section h3 {
     margin-bottom: 12px;
 }
 
-
 .popup {
-    position:fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, -50%);
-
+    transform: translate(-50%, -50%);
+    
+    width: 90%;           
+    max-width: 420px;      
+    
     background: white;
     padding: 20px;
-
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-
-    z-index:9999;
+    box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    z-index: 9999;
 }
-
 
 #login-button, #register-button {
     background-color: #FF3300;
     color: white;
-
     border: none;
     font-weight: 600;
-
     transition: 0.2s;
 }
 
@@ -118,4 +118,3 @@ section h3 {
 .hidden {
     display: none;
 }
-
