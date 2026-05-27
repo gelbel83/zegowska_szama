@@ -1,8 +1,29 @@
 <?php 
 require_once(__DIR__ . '/functions.php');
 
+function create_head_tags($is_index = false) {
+    $path_dots = $is_index ? '.' : '..';
+
+    echo "
+        <title>ZEGOWSKA SZAMA</title>
+        <meta lang='pl' />
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet' crossorigin='anonymous' />
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css' />
+
+        <link rel='preconnect' href='https://fonts.googleapis.com'>
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+        <link href='https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Podkova:wght@400..800&family=Luckiest+Guy&display=swap' rel='stylesheet' />
+
+        <link rel='stylesheet' href='{$path_dots}/style.css' type='text/css' />
+        <link rel='shortcut icon' href='{$path_dots}/resources/favicon.ico' type='image/x-icon' />
+    ";
+}
+
 function create_header($is_index = false){
-    if (!isset($_SESSION['user'])){
+    if (!isset($_SESSION['user']) && !$is_index){
         header("Location: /");
         exit;
     }
