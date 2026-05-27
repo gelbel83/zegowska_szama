@@ -119,6 +119,10 @@ section h3 {
     display: none;
 }
 
+.account-info {
+    padding: 10px;
+}
+
 .account-info > *:hover {
-    transform: scale(1.05);
+    transform: scale(1.3);
 }

@@ -38,8 +38,12 @@
                 header("Location: /");
             }
         ?>
-        <main class='flex-fill d-flex justify-content-center align-items-center'>
-            
+        <main class='flex-fill d-flex flex-column justify-content-start align-items-center'>
+            <div class="current-page-buttons d-flex align-items-center justify-content-center w-100 p-3">
+                <button type="submit" name="users-page-button" class="btn w-100">Użytkownicy</button>
+                <button type="submit" name="products-page-button" class="btn w-100">Produkty</button>
+                <button type="submit" name="orders-page-button" class="btn w-100">Zamówienia</button>
+            </div>
         </main>
         
         <?php create_footer();?>

@@ -1,6 +1,6 @@
 <?php 
 require_once("../php/functions.php");
-function create_header(){
+function create_header($is_index = false){
     if (!isset($_SESSION['user'])){
         header("Location: /");
     }
@@ -13,7 +13,6 @@ function create_header(){
             if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo 'display:none;';
                 }
-                
             echo "' >Panel administratora</button>
 
             <a href='/zamowienia' class='nav-link'><i class='bi bi-receipt'></i></a>
