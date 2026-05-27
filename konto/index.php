@@ -36,28 +36,31 @@
         <?php create_header();?>
         <main class='flex-fill d-flex justify-content-center align-items-center'>
             <div class="card text-center w-25">
-                <p>
+                <p class="account-info">
                     <h4>Login </h4>
                     <?php 
-                        echo $account_info['login'];
+                        echo "<span>{$account_info['login']}</span>";
                     ?>
                 </p>
-                <p>
+
+                <p class="account-info">
                     <h4>Imię </h4>
                     <?php 
-                        echo $account_info['imie'];
+                        echo "<span>{$account_info['imie']}</span>";
                     ?>
                 </p>
-                <p>
+
+                <p class="account-info">
                     <h4>Nazwisko </h4>
                     <?php 
-                        echo $account_info['nazwisko'];
+                        echo "<span>{$account_info['nazwisko']}</span>";
                     ?>
                 </p>
-                <p>
+                
+                <p class="account-info">
                     <h4>E-mail </h4>
                     <?php 
-                        echo $account_info['email'];
+                        echo "<span>{$account_info['email']}</span>";
                     ?>
                 </p>
                 

@@ -118,3 +118,7 @@ section h3 {
 .hidden {
     display: none;
 }
+
+.account-info > *:hover {
+    transform: scale(1.05);
+}
