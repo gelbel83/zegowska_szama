@@ -36,9 +36,9 @@
         </header>
         
         <nav class="d-flex align-items-center justify-content-end">
-            <button id="admin-panel-button" class="btn" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
+            <button id="admin-panel-button" class="btn" onclick="window.location.href = '/admin'" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo "display:none;";
-                }?>" >Panel administratora</button>
+                }?>">Panel administratora</button>
             <?php if (isset($_SESSION['user'])): ?>
             <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
             <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
