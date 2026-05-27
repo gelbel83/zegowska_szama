@@ -49,8 +49,8 @@
                 }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
             <a href="/ustawienia" class="nav-link"><i class="bi bi-gear"></i></a>
         </nav>
-    
-        <section class="sales-section d-flex flex-column p-3 <?php if (!isset($_SESSION['user'])){echo "hidden";}?>">
+        <?php if (isset($_SESSION['user'])): ?>
+        <section class="sales-section d-flex flex-column p-3 ">
             <h3>Po taniości</h3>
                 <div>
                     <button class="scroll-btn btn-left" onclick="scrollContainer(-(document.getElementById('product-scroll-container').style.width/2))">&#10094;</button>
@@ -93,7 +93,7 @@
                    
                 </div>
         </section>
-
+        <?php endif; ?>
         <section class="d-flex flex-column p-3">
             <h3>Co u nas wszamasz?</h3>
             <div class="products-container">
