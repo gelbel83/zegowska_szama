@@ -84,13 +84,11 @@
                                 </div>";
                             }
                         }
-                        else{
-                                echo "<h4> Brak promocji </h4>";
-                            }
-                      
+                        else {
+                            echo "<h4> Brak promocji </h4>";
+                        }
                     ?>
                     </div>
-                   
                 </div>
         </section>
 

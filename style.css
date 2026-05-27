@@ -19,9 +19,12 @@ img {
 nav {
     gap: 15px;
     padding: 16px 24px;
-    background-color: whitesmoke;
 
     border-bottom: 1px solid lightgray;
+}
+
+nav, footer {
+    background-color: whitesmoke;
     border-top: 1px solid lightgray;
 }
 
