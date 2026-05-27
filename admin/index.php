@@ -61,6 +61,8 @@
                             echo "<button>Zmień</button>";
                             echo "<button>Usuń</button>";
                             echo "</div>";
+                            //ogarnac popupa dla usera wedlug id
+                            //ogarnac popupa dla usuwania
                         }
                     }
                     else{
@@ -68,13 +70,16 @@
                     }
                 ?>
             </div>
+            <div class ="popup"> 
+                <div> tu login </div>
+            </div>
             <?php endif;?>
              <?php 
               if ((isset($_GET['page']) && $_GET['page']=='products')): 
             ?>
             <div class="products-div"> 
                 <?php 
-                    $users_sql = "SELECT * FROM uzytkownik";
+                    $users_sql = "SELECT * FROM produkty";
                     
                 ?>
             </div>
@@ -84,7 +89,7 @@
             ?>
             <div class="orders-div"> 
                 <?php 
-                    $users_sql = "SELECT * FROM uzytkownik";
+                    $users_sql = "SELECT * FROM zamowienia"; //rozwinac kw
                     
                 ?>
             </div>
