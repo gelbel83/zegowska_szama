@@ -5,6 +5,7 @@
 
     $account_info_query = "SELECT * FROM uzytkownik WHERE login LIKE(?)";
     $account_info = mysqli_select_values($account_info_query, array($_SESSION['user']), 1) [0];
+    
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +27,19 @@
         ?>
         <main class='flex-fill d-flex flex-column justify-content-start align-items-center'>
             <div class="current-page-buttons d-flex align-items-center justify-content-center w-100 p-3">
-                <button type="submit" name="users-page-button" class="btn w-100">Użytkownicy</button>
-                <button type="submit" name="products-page-button" class="btn w-100">Produkty</button>
-                <button type="submit" name="orders-page-button" class="btn w-100">Zamówienia</button>
+                <button type="submit" name="users-page-button" class="btn w-100" onclick="window.location.href = '?page=users'">Użytkownicy</button>
+                <button type="submit" name="products-page-button" class="btn w-100" onclick="window.location.href = '?page=products'">Produkty</button>
+                <button type="submit" name="orders-page-button" class="btn w-100" onclick="window.location.href = '?page=orders'">Zamówienia</button>
             </div>
+            <?php 
+              if ((isset($_GET['page']) && $_GET['page']=='users') || !isset($_GET['page'])): 
+            ?>
+            <div class="users-div"> 
+                <?php 
+                    $users_sql = "";
+                ?>
+            </div>
+            <?php endif;?>
         </main>
         
         <?php create_footer();?>
