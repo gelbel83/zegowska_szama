@@ -23,7 +23,7 @@ function create_head_tags($is_index = false) {
 }
 
 function create_header($is_index = false){
-    if (!isset($_SESSION['user'])){
+    if (!isset($_SESSION['user']) && !$is_index){
         header("Location: /");
         exit;
     }

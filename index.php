@@ -56,6 +56,7 @@
 
                 <div class="d-flex align-items-center justify-content-center"><button type="submit" id="login-button" name="login-button" class="btn w-75">Zaloguj</button></div>
             </form>
+            
             <?php 
                 if(isset($_POST['login-button'])){
                     $login_email = $_POST['login-email'];
