@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once('..\php\functions.php');
-    require_once('..\php\components.php');
+    require_once(__DIR__ . '/../php/functions.php');
+    require_once(__DIR__ . '/../php/components.php');
 
     $account_info_query = "SELECT * FROM uzytkownik WHERE login LIKE(?)";
     $account_info = mysqli_select_values($account_info_query, array($_SESSION['user']), 1) [0];

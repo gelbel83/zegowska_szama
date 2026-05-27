@@ -1,18 +1,23 @@
 <?php 
-require_once("../php/functions.php");
+require_once(__DIR__ . '/functions.php');
+
 function create_header($is_index = false){
     if (!isset($_SESSION['user'])){
         header("Location: /");
+        exit;
     }
+
+    $path_dots = $is_index ? '.' : '..';
+
     echo "<header class='w-100 d-flex align-items-center justify-content-center my-3'>
-            <a href='/'><img src='../resources/logo.gif' alt='ZEGOWSKA SZAMA' id='logo-image'/></a>
+            <a href='/'><img src='{$path_dots}/resources/logo.gif' alt='ZEGOWSKA SZAMA' id='logo-image'/></a>
         </header>
         
         <nav class='d-flex align-items-center justify-content-end'>
             <button id='admin-panel-button' class='btn' onclick='window.location.href =`/admin`' style='";
             if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
                 echo 'display:none;';
-                }
+            }
             echo "' >Panel administratora</button>
 
             <a href='/zamowienia' class='nav-link'><i class='bi bi-receipt'></i></a>
@@ -22,7 +27,7 @@ function create_header($is_index = false){
                 echo '/konto';
             }else{
                 echo "javascript:void(0);"; 
-                }
+            }
             echo "' id='konto-link' class='nav-link'><i class='bi bi-person-circle'></i></a>
         </nav>";
 }
