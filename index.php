@@ -1,6 +1,7 @@
 <?php
     session_start();
-    require_once('.\php\functions.php');
+    require_once(__DIR__ . '/php/functions.php');
+    require_once(__DIR__ . '/php/components.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,67 +32,17 @@
     </head>
     
     <body class="d-flex flex-column">
-        <header class="w-100 d-flex align-items-center justify-content-center my-3 px-3">
-            <img src="resources/logo.gif" alt="ZEGOWSKA SZAMA" id="logo-image"/>
-        </header>
-        
-        <nav class="d-flex align-items-center justify-content-end">
-            <button id="admin-panel-button" class="btn" onclick="window.location.href = '/admin'" style="<?php if(!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 1  ){
-                echo "display:none;";
-                }?>">Panel administratora</button>
-            <?php if (isset($_SESSION['user'])): ?>
-            <a href="/zamowienia" class="nav-link"><i class="bi bi-receipt"></i></a>
-            <a href="/koszyk" class="nav-link"><i class="bi bi-cart"></i></a>
-            <?php endif;?>
-            <a href="<?php if(isset($_SESSION['user'])) {
-                echo "/konto";
-            }else{
-                echo "javascript:void(0);";
-                }?>" id="konto-link" class="nav-link"><i class="bi bi-person-circle"></i></a>
-        </nav>
+        <?php create_header(true) ?>
+
         <?php if (isset($_SESSION['user'])): ?>
         <section class="sales-section d-flex flex-column p-3 ">
             <h3>Po taniości</h3>
-            <div>
-                <button class="scroll-btn btn-left" onclick="scrollContainer(-(document.getElementById('product-scroll-container').style.width/2))">&#10094;</button>
-                <button class="scroll-btn btn-right" onclick="scrollContainer((document.getElementById('product-scroll-container').style.width/2))">&#10095;</button>
-                <div id='product-scroll-container' class='d-flex flex-nowrap gap-3 overflow-auto p-2' style='scroll-behavior: smooth;'>
-                <?php 
-                    $sales_sql = "SELECT * FROM produkt WHERE promocja > 0;";
-                    $sales_arr = mysqli_select_no_parameters($sales_sql);
-                    if($sales_arr != null){
-                        foreach($sales_arr as $sale){
-                            echo "<div class='product-card card flex-row p-3 align-items-center justify-content-between shadow-sm'>
-                                    <div class='d-flex flex-column align-items-center w-50 pe-2'>
-                                        <h3 class='fw-bold mb-2'>";
-                                    
-                            echo $sale['nazwa'];
-                            echo "</h3>
-                                        <img src='/resources/produkty/bulki/";
-                            echo $sale['zdjecie'];
-                            echo "' class='img-fluid rounded' style='max-height: 100px; object-fit: cover;' />
-                                    </div>
-                                    
-                                    <div class='d-flex flex-column align-items-center w-50 ps-2 border-start'>
-                                        <span class='badge mb-1 fs-6'>";
-                            echo floatval($sale['promocja'])*100 . '%'; 
-                            echo "</span>
-                                        <h2 class='fw-bold text-dark mb-3'>";
-                            echo floatval($sale['cena']) . 'zł'; 
-                            echo "</h2>
-                                        <button class='btn w-100 fw-semibold btn-sm'>Do koszyka</button>
-                                    </div>
-                                </div>";
-                        }
-                    }
-                    else {
-                        echo "<h4> Brak promocji </h4>";
-                    }
-                ?>
-                </div>
+            <div class="sales-container h-25">
+                
             </div>
         </section>
         <?php endif; ?>
+
         <section class="d-flex flex-column p-3">
             <h3>Co u nas wszamasz?</h3>
             <div class="products-container">
@@ -99,11 +50,7 @@
             </div>
         </section>
 
-        <footer class='w-100 d-flex align-items-center justify-content-center my-3 flex-column flex-md-row'>
-            <div class='m-2'><div>Pomoc techniczna:</div><div>+48 882 466 642</div><div>pomoc_szama@zeg.pl</div></div>
-            <div class='m-2'><div>Kontakt z właścicielami sklepiku:</div><div>+48 412 642 537</div><div>sklepik_szama@zeg.pl</div></div>
-            <div class='m-2'><div>Autorzy:</div><div>Konrad Goliński</div><div>Kacper Gonciarz</div></div>
-        </footer>
+        <?php create_footer() ?>
 
         <div id="login-popup" class="popup hidden p-4">
             <form method="post">
