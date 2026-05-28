@@ -1,3 +1,5 @@
+"use strict";
+
 const kontoLink = document.getElementById('konto-link');
 const showRegisterPopupSpan = document.getElementById('show-register-popup-span');
 const showLoginPopupSpan = document.getElementById('show-login-popup-span');

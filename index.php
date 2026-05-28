@@ -24,7 +24,42 @@
         <section class="sales-section d-flex flex-column p-3 ">
             <h3>Po taniości</h3>
             <div class="sales-container h-25">
-                
+                <?php 
+                    $products_sql = "SELECT *, produkt.id AS id_pr, produkt.nazwa AS nazwa_pr, kategoria.nazwa AS nazwa_kat FROM produkt JOIN kategoria on kategoria_id=kategoria.id WHERE produkt.promocja > 0;";
+                    $products_arr = mysqli_select_no_parameters($products_sql);
+                    if(!empty($products_arr)){
+                        foreach($products_arr as $product){
+                            echo "<div class='product card m-1'>";
+
+                            echo "<h4>".$product['nazwa_pr']."</h4>"; 
+                             
+                            echo "Kategoria: ";
+                            echo $product['nazwa_kat']; 
+                            echo "<br>";
+
+                            echo "Cena: ";
+                            echo number_format($product['cena'], 2, '.', '') . "zł";
+                            echo "<br>";
+                            if($product['promocja'] > 0){
+                                echo "-".$product['promocja'] . "%";
+                            }
+                            
+                            if($product['dostepnosc'] == 1){
+                                echo "dostępny";
+                            }
+                            else{
+                                echo "niedostępny";
+                            }
+                            echo "<br>";
+
+                            echo "<button class='to-cart-button' id='to-cart-".$product['id_pr']."'>Dodaj do koszyka</button>";
+                            
+                            echo "</div>";
+                            //ogarnac popupa dla produktu wedlug id
+                            //ogarnac popupa dla usuwania
+                        }
+                    }
+                ?>
             </div>
         </section>
         <?php endif; ?>
@@ -32,7 +67,42 @@
         <section class="d-flex flex-column p-3">
             <h3>Co u nas wszamasz?</h3>
             <div class="products-container">
+                <?php 
+                    $products_sql = "SELECT *, produkt.id AS id_pr, produkt.nazwa AS nazwa_pr, kategoria.nazwa AS nazwa_kat FROM produkt JOIN kategoria on kategoria_id=kategoria.id;";
+                    $products_arr = mysqli_select_no_parameters($products_sql);
+                    if(!empty($products_arr)){
+                        foreach($products_arr as $product){
+                            echo "<div class='product card m-1'>";
 
+                            echo "<h4>".$product['nazwa_pr']."</h4>"; 
+                            
+                            echo "Kategoria: ";
+                            echo $product['nazwa_kat']; 
+                            echo "<br>";
+
+                            echo "Cena: ";
+                            echo number_format($product['cena'], 2, '.', '') . "zł";
+                            echo "<br>";
+                            if($product['promocja'] > 0){
+                                echo "-".$product['promocja'] . "%";
+                            }
+                            
+                            if($product['dostepnosc'] == 1){
+                                echo "dostępny";
+                            }
+                            else{
+                                echo "niedostępny";
+                            }
+                            echo "<br>";
+                            
+                            echo "<button class='to-cart-button' id='to-cart-".$product['id_pr']."'>Dodaj do koszyka</button>";
+                            
+                            echo "</div>";
+                            //ogarnac popupa dla produktu wedlug id
+                            //ogarnac popupa dla usuwania
+                        }
+                    }
+                ?>
             </div>
         </section>
 
@@ -126,5 +196,6 @@
                 }
             ?>
         </div>
+        <script src="./js/to_cart.js"></script>
     </body>
 </html>
