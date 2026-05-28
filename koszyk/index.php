@@ -17,8 +17,14 @@
     
     <body class="d-flex flex-column vh-100">
         <?php create_header();?>
+
+        <div id="products_display"> 
+            
+        </div>
         
         <?php create_footer();?>
+
+        <script src='../js/from_cart.js'> </script>
     </body>
 </html>
 
