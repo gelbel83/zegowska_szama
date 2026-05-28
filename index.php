@@ -94,7 +94,7 @@
                                 echo "niedostępny";
                             }
                             echo "<br>";
-                            
+
                             echo "<button class='to-cart-button' id='to-cart-".$product['id_pr']."'>Dodaj do koszyka</button>";
                             
                             echo "</div>";
@@ -132,10 +132,10 @@
                     
                     if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
                         $email = $login_email;
-                        check_login($email);
+                        check_login($email, $passwd);
                     }
                     else{
-                        check_login($login_email);
+                        check_login($login_email, $passwd);
                     }
                 }
             ?>
@@ -185,7 +185,7 @@
                 if(isset($_POST['register-button'])){
                     $login = $_POST['login'];
                     $email = $_POST['email'];
-                    $passwd = $_POST['passwd'];
+                    $passwd = sha1($_POST['passwd']);
                     $repeat_passwd = $_POST['repeat-passwd'];
                     $name = $_POST['name'];
                     $surname = $_POST['surname'];
