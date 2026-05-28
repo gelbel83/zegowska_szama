@@ -13,6 +13,7 @@
             const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
         </script>
 
+        <script src="../js/popups.js"></script>
     </head>
     
     <body class="d-flex flex-column vh-100">
@@ -30,7 +31,7 @@
             <?php 
               if ((isset($_GET['page']) && $_GET['page']=='users') || !isset($_GET['page'])): 
             ?>
-            <div class="users-div d-flex" > 
+            <div class="users-container d-flex"> 
                 <?php 
                     $users_sql = "SELECT * FROM uzytkownik";
                     $users_arr = mysqli_select_no_parameters($users_sql);
@@ -50,7 +51,6 @@
                             echo $user['nazwisko'];
                             echo "<br>";
                            
-                            
                             echo "Typ użytkownika: ";
                             if($user['uprawnienia_id'] == 2){
                                 echo "administrator";
@@ -58,8 +58,8 @@
                             else{
                                 echo "użytkownik";
                             }
-                            echo "<button>Zmień</button>";
-                            echo "<button>Usuń</button>";
+                            echo "<button class='edit-user-button'>Zmień</button>";
+                            echo "<button class='remove-user-button'>Usuń</button>";
                             echo "</div>";
                             //ogarnac popupa dla usera wedlug id
                             //ogarnac popupa dla usuwania
@@ -70,9 +70,11 @@
                     }
                 ?>
             </div>
-            <div class ="popup"> 
+
+            <div class="popup card hidden"> 
                 <div> tu login </div>
             </div>
+
             <?php endif;?>
              <?php 
               if ((isset($_GET['page']) && $_GET['page']=='products')): 
