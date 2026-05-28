@@ -98,8 +98,6 @@
                             echo "<button class='to-cart-button' id='to-cart-".$product['id_pr']."'>Dodaj do koszyka</button>";
                             
                             echo "</div>";
-                            //ogarnac popupa dla produktu wedlug id
-                            //ogarnac popupa dla usuwania
                         }
                     }
                 ?>
