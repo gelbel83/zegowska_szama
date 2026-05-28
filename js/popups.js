@@ -14,12 +14,9 @@ function hideAllPopups() {
 
 document.addEventListener('click', (e) => {
     const clickedInsideAnyPopup = e.target.closest('.popup'); 
-    
     const clickedKontoLink = kontoLink.contains(e.target);
 
-    if (!clickedInsideAnyPopup && !clickedKontoLink) {
-        hideAllPopups();
-    }
+    if (!clickedInsideAnyPopup && !clickedKontoLink) hideAllPopups();
 });
 
 kontoLink.addEventListener('click', (e) => {
@@ -40,3 +37,8 @@ showLoginPopupSpan.addEventListener('click', () => {
     hideAllPopups();
     document.getElementById('login-popup').classList.remove('hidden');
 });
+
+// 
+
+
+
