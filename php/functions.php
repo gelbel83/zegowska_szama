@@ -105,9 +105,9 @@ function mysqli_change_values($query, $values_arr, $parameters_num){
     }
 }
 
-function check_login($login){
-    $query = "SELECT * FROM uzytkownik WHERE login LIKE(?) OR email LIKE(?);";
-    $users_arr = mysqli_select_values($query, array(trim($login), trim($login)), 2);
+function check_login($login, $passwd){
+    $query = "SELECT * FROM uzytkownik WHERE (login LIKE(?) OR email LIKE(?)) AND haslo LIKE(?);";
+    $users_arr = mysqli_select_values($query, array(trim($login), trim($login), trim(sha1($passwd))), 3);
     if(empty($users_arr)){
         return false;
     }else{
