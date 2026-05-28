@@ -81,13 +81,17 @@
                 <button id="add-product-button" class = "w-100">dodaj produkt</button>
                 <div class="products-container d-flex overflow-scroll"> 
                 <?php 
-                    $products_sql = "SELECT *, produkt.nazwa AS nazwa_pr, kategoria.nazwa AS nazwa_kat FROM produkt JOIN kategoria on kategoria_id=kategoria.id;";
+                    $products_sql = "SELECT *, produkt.id AS id_pr, produkt.nazwa AS nazwa_pr, kategoria.nazwa AS nazwa_kat FROM produkt JOIN kategoria on kategoria_id=kategoria.id;";
                     $products_arr = mysqli_select_no_parameters($products_sql);
                     if(!empty($products_arr)){
                         foreach($products_arr as $product){
                             echo "<div class='product card m-1'>";
 
                             echo "<h4>".$product['nazwa_pr']."</h4>"; 
+                            
+                            echo "Kategoria: ";
+                            echo $product['nazwa_kat']; 
+                            echo "<br>";
 
                             echo "Cena podstawowa: ";
                             echo number_format($product['cena'], 2, '.', '') . "zł";
