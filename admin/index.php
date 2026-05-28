@@ -36,7 +36,7 @@
                     $users_arr = mysqli_select_no_parameters($users_sql);
                     if(!empty($users_arr)){
                         foreach($users_arr as $user){
-                            echo "<div class='user card'>";
+                            echo "<div class='user card m-1'>";
                             echo "Login: ";
                             echo $user['login'];
                             echo "<br>";
@@ -78,10 +78,44 @@
               if ((isset($_GET['page']) && $_GET['page']=='products')): 
             ?>
             <div class="products-div"> 
+                <button id="add-product-button" class = "w-100">dodaj produkt</button>
+                <div class="products-container d-flex overflow-scroll"> 
                 <?php 
-                    $users_sql = "SELECT * FROM produkty";
-                    
+                    $products_sql = "SELECT *, produkt.nazwa AS nazwa_pr, kategoria.nazwa AS nazwa_kat FROM produkt JOIN kategoria on kategoria_id=kategoria.id;";
+                    $products_arr = mysqli_select_no_parameters($products_sql);
+                    if(!empty($products_arr)){
+                        foreach($products_arr as $product){
+                            echo "<div class='product card m-1'>";
+
+                            echo "<h4>".$product['nazwa_pr']."</h4>"; 
+
+                            echo "Cena podstawowa: ";
+                            echo number_format($product['cena'], 2, '.', '') . "zł";
+                            echo "<br>";
+                            echo "Promocja: ";
+                            echo $product['promocja'] . "%";
+                            echo "<br>";
+                            echo "Dostępność: ";
+                            if($product['dostepnosc'] == 1){
+                                echo "dostępny";
+                            }
+                            else{
+                                echo "niedostępny";
+                            }
+                            echo "<br>";
+
+                            echo "<button>Edytuj</button>";
+                            echo "<button>Usuń</button>";
+                            echo "</div>";
+                            //ogarnac popupa dla produktu wedlug id
+                            //ogarnac popupa dla usuwania
+                        }
+                    }
+                    else{
+                        echo "<h3> Brak danych </h3>";
+                    }
                 ?>
+                </div>
             </div>
             <?php endif;?>
              <?php 
