@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 28, 2026 at 04:39 PM
+-- Generation Time: Maj 28, 2026 at 05:56 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -166,7 +166,8 @@ CREATE TABLE `zamowienie` (
   `id` int(10) UNSIGNED NOT NULL,
   `data_zamowienia` date NOT NULL,
   `status_id` int(10) UNSIGNED NOT NULL,
-  `uzytkownik_id` int(10) UNSIGNED NOT NULL
+  `uzytkownik_id` int(10) UNSIGNED NOT NULL,
+  `cena` float UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------

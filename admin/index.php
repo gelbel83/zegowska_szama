@@ -123,8 +123,36 @@
             ?>
             <div class="orders-div"> 
                 <?php 
-                    $users_sql = "SELECT * FROM zamowienia"; //rozwinac kw
-                    
+                    $orders_sql = "SELECT zamowienie.id AS z_id, zamowienie.data_zamowienia AS z_data, zamowienie.cena AS z_cena, status.nazwa AS z_status, uzytkownik.login AS z_login FROM zamowienie JOIN status ON zamowienie.status_id = status.id JOIN uzytkownik ON uzytkownik.id = zamowienie.status_id;"; 
+                    $orders_arr = mysqli_select_no_parameters($orders_sql);
+                    if(!empty($orders_arr)){
+                        foreach($orders_arr as $order){
+                            echo "<div class='order card m-1'>";
+
+                            echo "<h4> Zamówienie nr. ".$order['z_id']."</h4>";
+                            echo "Data zamówienia: ";
+                            echo $order['z_data'];
+                            echo "<br>";
+                            echo "Zamawiający: ";
+                            echo $order['z_login'];
+                            echo "<br>";
+                            echo "Cena: ";
+                            echo $order['z_cena'];
+                            echo "<br>";
+                            echo "Status: ";
+                            echo $order['z_status'];
+                            echo "<br>";
+
+                            echo "<button>Szczegóły</button>";
+                            echo "<button>Usuń</button>";
+                            echo "</div>";
+                            //ogarnac popupa dla zamowienia wedlug id
+                            //ogarnac popupa dla usuwania
+                        }
+                    }
+                    else{
+                        echo "<h3> Brak danych </h3>";
+                    }
                 ?>
             </div>
             <?php endif;?>
