@@ -70,15 +70,36 @@
                     }
                 ?>
             </div>
-
-            <div class="popup card hidden"> 
+            
+            <!-- fajnie by było jak byś mógł jakoś przekazać id i login tego usera - login do wyswietlenia, id do kwerendy-->
+            <div class="popup card hidden" id="user_access_popup"> 
                 <div> tu login </div>
                 <form method="post" action=""> 
                     <select name="user_access">
                         <option value="1"> użytkownik </option>
                         <option value="2"> administrator </option>
                     </select>
+                    <input type="submit" name="change_user" value="Zmień">
                 </form>
+                <?php 
+                    if(isset($_POST['change_user'])){
+                        $user_sql = "UPDATE uzytkownik SET uprawnienia_id = ? WHERE id = ?;";
+                        $user_access = $_POST['user_access'];
+                        $user_id = 4; //gunk ogarnij przekazywanie id
+                        mysqli_change_values($user_sql, array($user_access, $user_id), 2);
+                    }
+                ?>
+            </div>
+            <div class="popup card hidden" id="delete_user_confirm"> 
+                <input type="submit" name="user_d_confirm" value="Usuń">
+                <button onclick="//zamknij popupa">Anuluj</button>
+                <?php 
+                    if($isset($_POST['user_d_confirm'])){
+                        $user_del_sql = "DELETE FROM uzytkownik where id = ?";
+                        $user_id = 0;//gunk ogarnij przekazywanie id
+                        mysqli_change_values($user_del_sql, array($user_id), 1);
+                    }
+                ?>
             </div>
 
             <?php endif;?>
