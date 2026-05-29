@@ -12,9 +12,7 @@
     <head>
         <?php create_head_tags()?>
 
-        <script>
-            const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
-        </script>
+        <script>const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;</script>
     </head>
     
     <body class="d-flex flex-column vh-100">

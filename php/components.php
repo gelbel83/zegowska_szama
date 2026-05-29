@@ -42,8 +42,8 @@ function create_header($is_index = false){
 
             echo "<a href='/zamowienia' id='orders-link' class='nav-link'><i class='bi bi-receipt'></i></a>
                   <a href='/koszyk' id='cart-link' class='nav-link'><i class='bi bi-cart'></i></a>
+                  <a href='/' class='nav-link'><i class='bi bi-fork-knife'></i></a>
                   <a href='".(isset($_SESSION['user']) ? '/konto' : 'javascript:void(0)')."' id='konto-link' class='nav-link'><i class='bi bi-person-circle'></i></a>
-                  <a href='/' class='nav-link'><i class='bi bi-house'></i></a>
           </nav>";
 }
 

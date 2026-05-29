@@ -45,11 +45,12 @@ nav, footer {
     margin-right: auto;
 }
 
+/* Wygląd domyślny */
 .orange-button {
     background-color: #FF3300;
     color: white;
     border: none;
-    transition: 0.2s;
+    transition: all 0.2s ease-in-out;
     font-weight: 600;
 }
 
@@ -58,6 +59,21 @@ nav, footer {
     color: white;
     transform: translateY(-3px);
 }
+
+.orange-button:active {
+    background-color: #CC2900 !important;
+    color: white !important;
+    transform: translateY(0);
+    opacity: 1 !important;
+}
+
+.orange-button:focus, 
+.orange-button:focus-visible {
+    color: white;
+    outline: none;
+}
+
+.orange-button::clic
 
 .nav-link {
     background: transparent;

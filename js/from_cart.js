@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cartDisplayContainer.addEventListener('click', (event) => {
         let currentCartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
         
-        // usuwanie produktu
         const removeButton = event.target.closest('.remove-product');
         if (removeButton) {
             const targetProductId = removeButton.getAttribute('data-id');
@@ -46,15 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // plus
         if (event.target.classList.contains('increase-quantity')) {
             const targetProductId = event.target.getAttribute('data-id');
             currentCartItems.push(targetProductId); 
             sessionStorage.setItem('cart', JSON.stringify(currentCartItems));
             renderCart();
+            return;
         }
 
-        // minus
         if (event.target.classList.contains('decrease-quantity')) {
             const targetProductId = event.target.getAttribute('data-id');
             const currentProductCount = currentCartItems.filter(id => String(id) === String(targetProductId)).length;
@@ -69,6 +67,51 @@ document.addEventListener("DOMContentLoaded", () => {
                 sessionStorage.setItem('cart', JSON.stringify(currentCartItems));
                 renderCart();
             }
+            return;
+        }
+
+        if (event.target.id === 'place-order-button') {
+            if (currentCartItems.length === 0) {
+                alert("Twój koszyk jest pusty!");
+                return;
+            }
+
+            event.target.disabled = true;
+            event.target.innerText = "Przetwarzanie...";
+
+            fetch('../php/place_order.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(currentCartItems)
+            })
+            .then(response => response.json()) 
+            .then(data => {
+                if (data.success) {
+                    const popup = document.getElementById('order-success-popup');
+                    const orderNumberDisplay = document.getElementById('popup-order-number');
+                    orderNumberDisplay.innerText = data.order_id;
+                    popup.classList.remove('hidden');
+
+                    event.target.disabled = false;
+                    event.target.innerText = "Złóż zamówienie";
+
+                    const observer = new MutationObserver((mutations) => {
+                        if (popup.classList.contains('hidden')) {
+                            sessionStorage.removeItem('cart');
+                            renderCart(); 
+                            observer.disconnect(); 
+                        }
+                    });
+
+                    observer.observe(popup, { attributes: true, attributeFilter: ['class'] });
+                } else {
+                    alert("Wystąpił błąd: " + data.message);
+                    event.target.disabled = false;
+                    event.target.innerText = "Złóż zamówienie";
+                }
+            })
         }
     });
 });

@@ -3,24 +3,16 @@
     require_once(__DIR__ . '/php/functions.php');
     require_once(__DIR__ . '/php/components.php');
 
-    // ==========================================
-    // LOGIKA BIZNESOWA (Musi być przed HTML!)
-    // ==========================================
-
-    // Obsługa logowania
     if(isset($_POST['login-button'])){
         $login_email = $_POST['login-email'];
         $passwd = $_POST['passwd'];
         
-        // Zależnie od tego jak działa Twoje check_login, zakładałem, że samo ustawia sesję
         check_login($login_email, $passwd);
         
-        // Przekierowanie, aby wyczyścić żądanie POST (zapobiega podwójnemu wysłaniu)
         header("Location: index.php");
         exit;
     }
 
-    // Obsługa rejestracji
     if(isset($_POST['register-button'])){
         $login = $_POST['login'];
         $email = $_POST['email'];
@@ -29,16 +21,12 @@
         $name = $_POST['name'];
         $surname = $_POST['surname'];
 
-        // Szybka walidacja (czy hasła się zgadzają)
         if ($passwd === $repeat_passwd) {
-            // Zalecana zmiana: zamiast sha1() użyj password_hash()!
-            // Pamiętaj, że wtedy w check_login musisz użyć password_verify()
-            $hashed_passwd = sha1($passwd); // Zostawiam Twoje dla kompatybilności, ale polecam zmienić
+            $hashed_passwd = sha1($passwd);
             
             $query = "INSERT INTO `uzytkownik`(`login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES (?, ?, ?, ?, ?, 1)";
             mysqli_change_values($query, array($login, $email, $hashed_passwd, $name, $surname), 5);
             
-            // Po rejestracji odśwież stronę
             header("Location: index.php?registered=1");
             exit;
         } else {
@@ -52,10 +40,7 @@
     <head>
         <?php create_head_tags(true)?>
 
-        <script>
-            const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
-        </script>
-
+        <script>const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;</script>
         <script src="./js/popups.js" defer></script>
         <script src="./js/scroll.js" defer></script>
         <script src="./js/to_cart.js" defer></script>
