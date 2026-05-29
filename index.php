@@ -38,7 +38,7 @@
                             echo "<br>";
 
                             echo "Cena: ";
-                            echo number_format($product['cena'], 2, '.', '') . "zł";
+                            echo number_format(($product['cena']*(1-$product['promocja'])), 2, '.', '') . "zł";
                             echo "<br>";
                             if($product['promocja'] > 0){
                                 echo "-".$product['promocja'] . "%";
@@ -81,10 +81,10 @@
                             echo "<br>";
 
                             echo "Cena: ";
-                            echo number_format($product['cena'], 2, '.', '') . "zł";
+                            echo number_format(($product['cena']*(1-$product['promocja'])), 2, '.', '') . "zł";
                             echo "<br>";
                             if($product['promocja'] > 0){
-                                echo "-".$product['promocja'] . "%";
+                                echo "-".$product['promocja']*100 . "%";
                             }
                             
                             if($product['dostepnosc'] == 1){
