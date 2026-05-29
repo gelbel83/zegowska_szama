@@ -1,3 +1,5 @@
+/* główne componenty */
+
 body {
     font-family: 'Podkova', sans-serif;
     background-color: white;
@@ -7,21 +9,6 @@ body {
 img {
     max-width: 100%;
     height: auto;
-}
-
-#logo-image {
-    width: 85%; 
-    max-width: 450px;
-    display: block;
-    object-fit: contain;
-    margin: 0 auto;
-}
-
-@media (min-width: 768px) {
-    #logo-image {
-        width: 50vw;
-        max-width: 800px;
-    }
 }
 
 nav {
@@ -35,18 +22,41 @@ nav, footer {
     border-bottom: 1px solid lightgray;
 }
 
+/* logo */
+
+#logo-image {
+    width: 100%; 
+    max-width: 450px;
+    display: block;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    #logo-image {
+        width: 50vw;
+        max-width: 800px;
+    }
+}
+
+/* przyciski */
+
 #admin-panel-button {
     margin-right: auto;
+}
+
+.orange-button {
     background-color: #FF3300;
     color: white;
     border: none;
-    font-weight: 600;
     transition: 0.2s;
+    font-weight: 600;
 }
 
-#admin-panel-button:hover {
+.orange-button:hover {
     background-color: #FF5C33;
-    transform: translateY(-1px);
+    color: white;
+    transform: translateY(-3px);
 }
 
 .nav-link {
@@ -66,9 +76,7 @@ nav, footer {
     font-size: 2rem;
 }
 
-section h3 {
-    margin-bottom: 12px;
-}
+/* popupy */
 
 .popup {
     position: fixed;
@@ -86,19 +94,6 @@ section h3 {
     z-index: 9999;
 }
 
-#login-button, #register-button {
-    background-color: #FF3300;
-    color: white;
-    border: none;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-#login-button:hover, #register-button:hover {
-    background-color:  #FF5C33;
-    transform: translateY(-1px);
-}
-
 .form-control:focus {
     border-color: #FF3300;
     box-shadow: 0 0 0 0.25rem #FF5C33;
@@ -114,9 +109,7 @@ section h3 {
     color: #FF5C33;
 }
 
-.hidden {
-    display: none;
-}
+/* konto */
 
 .account-info {
     padding: 10px;
@@ -124,4 +117,10 @@ section h3 {
 
 .account-info > *:hover {
     transform: scale(1.3);
+}
+
+/* utils */
+
+.hidden {
+    display: none;
 }

@@ -49,16 +49,17 @@
                     ?>
                 </div>
                 
-                <button onclick="window.location.href = '?akcja=wyloguj'" class="btn w-50 m-auto my-3" style="background-color: #FF3300; color: white;" >Wyloguj</button>
+                <button onclick="window.location.href = '?akcja=wyloguj'" class="btn w-50 m-auto my-3 orange-button">Wyloguj</button>
                 <?php 
-                    if(isset( $_GET['akcja'])){
-                        $akcja = $_GET['akcja'];
-                        if($akcja == 'wyloguj'){
-                            session_destroy();
-                            header("Location: /");
-                        }
+                    if(isset($_GET['akcja']) && $_GET['akcja'] == 'wyloguj'){
+                        session_destroy();
+
+                        echo "<script>
+                                sessionStorage.clear(); // Czyści cały koszyk/dane w pamięci
+                                window.location.href = '/'; // Przekierowuje po wyczyszczeniu
+                            </script>";
+                        exit;
                     }
-                
                 ?>
             </div>
         </main>

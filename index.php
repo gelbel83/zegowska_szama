@@ -56,7 +56,7 @@
                             echo "                  </div>";
                             echo "              </div>";
                             
-                            echo "              <button class='btn btn-sm btn-outline-dark w-100 mt-2 to-cart-button' data-id='{$product['id_pr']}'>Do koszyka</button>";
+                            echo "              <button class='btn btn-sm w-100 mt-2 to-cart-button orange-button' data-id='{$product['id_pr']}'>Do koszyka</button>";
                             echo "          </div>";
                             
                             echo "      </div>";
@@ -113,7 +113,7 @@
                                     echo "      <p class='text-dark fw-bold mb-2'>".number_format($cena_base, 2, '.', '')." zł</p>";
                                 }
                                 echo "      </div>";
-                                echo "      <button class='btn btn-sm btn-outline-dark w-100 to-cart-button mt-auto' data-id='{$product['id']}'>Do koszyka</button>";
+                                echo "      <button class='btn btn-sm w-100 to-cart-button mt-auto orange-button' data-id='{$product['id']}'>Do koszyka</button>";
                                 echo "  </div>";
                                 echo "</div>";
                             }
@@ -141,7 +141,7 @@
                     <span>Nie masz konta? Zarejestruj się <span class="show-popup-text" id="show-register-popup-span">tutaj!</span></span>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <button type="submit" id="login-button" name="login-button" class="btn w-75">Zaloguj</button>
+                    <button type="submit" id="login-button" name="login-button" class="btn w-75 orange-button">Zaloguj</button>
                 </div>
             </form>
             <?php 
@@ -187,7 +187,7 @@
                     <span>Masz już konto? Zaloguj się <span class="show-popup-text" id="show-login-popup-span">tutaj!</span></span>
                 </div>
                 <div class="d-flex align-items-center justify-content-center">
-                    <button type="submit" id="register-button" name="register-button" class="btn w-75">Zarejestruj</button>
+                    <button type="submit" id="register-button" name="register-button" class="btn w-75 orange-button">Zarejestruj</button>
                 </div>
             </form>
             <?php 
