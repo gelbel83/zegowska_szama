@@ -17,9 +17,7 @@
     <body class="d-flex flex-column vh-100">
         <?php create_header();?>
 
-        <div id="products_display" class="flex-fill d-flex flex-column"> 
-            
-        </div>
+        <div id="products_display" class="flex-fill d-flex flex-column"></div>
         
         <?php create_footer();?>
 
