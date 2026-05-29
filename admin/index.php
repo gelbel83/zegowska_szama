@@ -73,6 +73,12 @@
 
             <div class="popup card hidden"> 
                 <div> tu login </div>
+                <form method="post" action=""> 
+                    <select name="user_access">
+                        <option value="1"> użytkownik </option>
+                        <option value="2"> administrator </option>
+                    </select>
+                </form>
             </div>
 
             <?php endif;?>
