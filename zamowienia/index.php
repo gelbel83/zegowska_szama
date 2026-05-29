@@ -21,10 +21,10 @@
         <div id="orders_display"> 
             <?php 
                 if($_SESSION['user_type'] == 2){
-                    $orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa, uzytkownik.login, produkt.nazwa, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id WHERE zamowienie.status_id < 4;"; 
+                    $orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa as nazwa_st, uzytkownik.login, produkt.nazwa as nazwa_pr, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id WHERE zamowienie.status_id < 4;"; 
                     $orders_arr = mysqli_select_no_parameters($orders_sql);
                 }else{
-                    $orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa, uzytkownik.login, produkt.nazwa, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id WHERE zamowienie.status_id < 4 AND uzytkownik.login LIKE (?);"; 
+                    $orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa as nazwa_st, uzytkownik.login, produkt.nazwa as nazwa_pr, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id WHERE zamowienie.status_id < 4 AND uzytkownik.login LIKE (?);"; 
                     $orders_arr = mysqli_select_values($orders_sql, array($_SESSION['user']), 1);   
                 }
                 

@@ -229,7 +229,7 @@
                 <input type="submit" name="product_d_confirm" value="Usuń">
                 <button onclick="//zamknij popupa">Anuluj</button>
                 <?php 
-                    if(isset($_POST['user_d_confirm'])){
+                    if(isset($_POST['product_d_confirm'])){
                         $product_del_sql = "DELETE FROM produkt where id = ?";
                         $product_id = 0;//gunk ogarnij przekazywanie id
                         mysqli_change_values($product_del_sql, array($product_id), 1);
@@ -276,12 +276,21 @@
             <div class="popup card hidden" id="order_edit_popup"> 
                 <div> 
                     <?php 
-                        $all_orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa, uzytkownik.login, produkt.nazwa, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id;";
-                        
+                        $all_orders_sql = "SELECT zamowienie.id, zamowienie.data_zamowienia, zamowienie.cena, status.nazwa as nazwa_st, uzytkownik.login, produkt.nazwa as nazwa_pr, zawartosc_zamowienia.ilosc FROM zamowienie JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id JOIN produkt ON produkt.id=zawartosc_zamowienia.produkt_id JOIN status ON status.id = zamowienie.status_id JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id WHERE zamowienie.id LIKE(?);";
+                        $all_orders_arr = mysqli_select_values($all_orders_sql, array(1), 1); //gunk pobierz wartosc nie wiem jak to zrobisz ale zrob glhf
+                        echo "Numer zamówienia: ".$all_orders_arr[0]['id'];
+                        echo "Data zamówienia: ".$all_orders_arr[0]['data_zamowienia'];
+                        echo "Cena zamówienia: ".$all_orders_arr[0]['cena'];
+                        echo "Status zamówienia: ".$all_orders_arr[0]['nazwa_st'];
+                        echo "Zamawiający: ".$all_orders_arr[0]['login'];
+                        echo "Produkty: ";
+                        foreach($all_orders_arr as $order){
+                            echo $order['nazwa_pr'] . " - ilość: " . $order['ilosc'];
+                        }
                     ?>
                 </div>
                 <form method="post" action=""> 
-                    <select name = "kategoria_pr" required>
+                    <select name = "status_zam" required>
                         <?php 
                             $get_status_sql = "SELECT * FROM status";
                             $statuses = mysqli_select_no_parameters($get_status_sql);
@@ -295,25 +304,22 @@
                     <input type="submit" name="change_order" value="Zapisz">
                 </form>
                 <?php 
-                    if(isset($_POST['change_product'])){
-                        $product_sql = "UPDATE produkt SET nazwa=?, cena=?, dostepnosc=?, promocja=? WHERE produkt.id = ?;";
-                        $product_name = $_POST['nazwa_pr'];
-                        $product_price = $_POST['cena_pr'];
-                        $product_availability = $_POST['dostepnosc_pr'] ?? 0;
-                        $product_sale = $_POST['promocja_pr']/100;
-                        $product_id = -1; //gunk ogarnij przekazywanie id
-                        mysqli_change_values($product_sql, array($product_name, $product_price, $product_availability, $product_sale, $product_id), 5);
+                    if(isset($_POST['change_order'])){
+                        $order_sql = "UPDATE zamowienie SET zamowienie.status_id = ? WHERE produkt.id = ?;";
+                        $order_status = $_POST['status_zam'];
+                        $order_id = -1; //gunk ogarnij przekazywanie id
+                        mysqli_change_values($order_sql, array($order_status, $order_id), 2);
                     }
                 ?>
             </div>
-            <div class="popup card hidden" id="delete_product_confirm"> 
-                <input type="submit" name="product_d_confirm" value="Usuń">
+            <div class="popup card hidden" id="delete_order_confirm"> 
+                <input type="submit" name=order_d_confirm" value="Usuń">
                 <button onclick="//zamknij popupa">Anuluj</button>
                 <?php 
-                    if(isset($_POST['user_d_confirm'])){
-                        $product_del_sql = "DELETE FROM produkt where id = ?";
-                        $product_id = 0;//gunk ogarnij przekazywanie id
-                        mysqli_change_values($product_del_sql, array($product_id), 1);
+                    if(isset($_POST['order_d_confirm'])){
+                        $product_del_sql = "DELETE FROM zamowienie, zawartosc_zamowienia where zamowienie.id = ? OR zawartosc_zamowienia.zamowienie_id = ?";
+                        $order_id = 0;//gunk ogarnij przekazywanie id
+                        mysqli_change_values($product_del_sql, array($order_id, $order_id), 2);
                     }
                 ?>
             <?php endif;?>
