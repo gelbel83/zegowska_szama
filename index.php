@@ -2,6 +2,49 @@
     session_start();
     require_once(__DIR__ . '/php/functions.php');
     require_once(__DIR__ . '/php/components.php');
+
+    // ==========================================
+    // LOGIKA BIZNESOWA (Musi być przed HTML!)
+    // ==========================================
+
+    // Obsługa logowania
+    if(isset($_POST['login-button'])){
+        $login_email = $_POST['login-email'];
+        $passwd = $_POST['passwd'];
+        
+        // Zależnie od tego jak działa Twoje check_login, zakładałem, że samo ustawia sesję
+        check_login($login_email, $passwd);
+        
+        // Przekierowanie, aby wyczyścić żądanie POST (zapobiega podwójnemu wysłaniu)
+        header("Location: index.php");
+        exit;
+    }
+
+    // Obsługa rejestracji
+    if(isset($_POST['register-button'])){
+        $login = $_POST['login'];
+        $email = $_POST['email'];
+        $passwd = $_POST['passwd'];
+        $repeat_passwd = $_POST['repeat-passwd'];
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+
+        // Szybka walidacja (czy hasła się zgadzają)
+        if ($passwd === $repeat_passwd) {
+            // Zalecana zmiana: zamiast sha1() użyj password_hash()!
+            // Pamiętaj, że wtedy w check_login musisz użyć password_verify()
+            $hashed_passwd = sha1($passwd); // Zostawiam Twoje dla kompatybilności, ale polecam zmienić
+            
+            $query = "INSERT INTO `uzytkownik`(`login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES (?, ?, ?, ?, ?, 1)";
+            mysqli_change_values($query, array($login, $email, $hashed_passwd, $name, $surname), 5);
+            
+            // Po rejestracji odśwież stronę
+            header("Location: index.php?registered=1");
+            exit;
+        } else {
+            $register_error = "Hasła nie są identyczne!";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -13,8 +56,9 @@
             const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;
         </script>
 
-        <script src="js/popups.js" defer></script>
-        <script src="js/scroll.js" defer></script>
+        <script src="./js/popups.js" defer></script>
+        <script src="./js/scroll.js" defer></script>
+        <script src="./js/to_cart.js" defer></script>
     </head>
     
     <body class="d-flex flex-column min-vh-100 bg-light">
@@ -144,21 +188,14 @@
                     <button type="submit" id="login-button" name="login-button" class="btn w-75 orange-button">Zaloguj</button>
                 </div>
             </form>
-            <?php 
-                if(isset($_POST['login-button'])){
-                    $login_email = $_POST['login-email'];
-                    $passwd = $_POST['passwd'];
-                    if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
-                        check_login($login_email, $passwd);
-                    } else {
-                        check_login($login_email, $passwd);
-                    }
-                }
-            ?>
         </div>
        
         <div id="register-popup" class="popup hidden p-4">
             <form method="post">
+                <?php if(isset($register_error)): ?>
+                    <div class="alert alert-danger m-3"><?php echo $register_error; ?></div>
+                <?php endif; ?>
+                
                 <div class="form-group m-3">
                     <label for="login" class="m-1">Login</label>
                     <input type="text" class="form-control m-1" name="login" required />
@@ -190,18 +227,12 @@
                     <button type="submit" id="register-button" name="register-button" class="btn w-75 orange-button">Zarejestruj</button>
                 </div>
             </form>
-            <?php 
-                $query = "INSERT INTO `uzytkownik`(`login`, `email`, `haslo`, `imie`, `nazwisko`, `uprawnienia_id`) VALUES (?, ?, ?, ?, ?, 1)";
-                if(isset($_POST['register-button'])){
-                    $login = $_POST['login'];
-                    $email = $_POST['email'];
-                    $passwd = sha1($_POST['passwd']);
-                    $name = $_POST['name'];
-                    $surname = $_POST['surname'];
-                    mysqli_change_values($query, array($login, $email, $passwd, $name, $surname), 5);
-                }
-            ?>
         </div>
-        <script src="./js/to_cart.js"></script>
+
+        <div id="added-to-cart-popup" class="popup p-4 hidden">
+            <div class="d-flex flex-column g-3 justify-content-center align-items-center">
+                <h3>Dodano do koszyka!</h3>
+            </div>
+        </div>
     </body>
 </html>
