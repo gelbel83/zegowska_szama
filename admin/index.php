@@ -70,9 +70,36 @@
                     }
                 ?>
             </div>
-
-            <div class="popup card hidden"> 
+            
+            <!-- fajnie by było jak byś mógł jakoś przekazać id i login tego usera - login do wyswietlenia, id do kwerendy-->
+            <div class="popup card hidden" id="user_access_popup"> 
                 <div> tu login </div>
+                <form method="post" action=""> 
+                    <select name="user_access">
+                        <option value="1"> użytkownik </option>
+                        <option value="2"> administrator </option>
+                    </select>
+                    <input type="submit" name="change_user" value="Zmień">
+                </form>
+                <?php 
+                    if(isset($_POST['change_user'])){
+                        $user_sql = "UPDATE uzytkownik SET uprawnienia_id = ? WHERE id = ?;";
+                        $user_access = $_POST['user_access'];
+                        $user_id = 4; //gunk ogarnij przekazywanie id
+                        mysqli_change_values($user_sql, array($user_access, $user_id), 2);
+                    }
+                ?>
+            </div>
+            <div class="popup card hidden" id="delete_user_confirm"> 
+                <input type="submit" name="user_d_confirm" value="Usuń">
+                <button onclick="//zamknij popupa">Anuluj</button>
+                <?php 
+                    if($isset($_POST['user_d_confirm'])){
+                        $user_del_sql = "DELETE FROM uzytkownik where id = ?";
+                        $user_id = 0;//gunk ogarnij przekazywanie id
+                        mysqli_change_values($user_del_sql, array($user_id), 1);
+                    }
+                ?>
             </div>
 
             <?php endif;?>
@@ -123,6 +150,40 @@
                 ?>
                 </div>
             </div>
+            <div class="popup card hidden" id="product_edit_popup"> 
+                <form method="post" action=""> 
+                    <label for="nazwa_pr">Nazwa: </label>
+                    <input type="text" name="nazwa_pr" value=""> <!--value z bazy gunk ogarnij dla każdego inputa-->
+                    <label for="cena_pr">Cena: </label>
+                    <input type="text" name="cena_pr" value="">
+                    <label for="dostepnosc_pr">Dostępny: </label>
+                    <input type="checkbox" name="dostepnosc_pr" value="">
+                    <label for="promocja_pr">Promocja: </label>
+                    <input type="number" name="promocja_pr" value="">
+                    <input type="submit" name="change_product" value="Zapisz">
+                </form>
+                <?php 
+                    if(isset($_POST['change_product'])){
+                        $product_sql = "UPDATE produkt SET nazwa=?, cena=?, dostepnosc=?, promocja=? WHERE produkt.id = ?;";
+                        $product_name = $_POST['nazwa_pr'];
+                        $product_price = $_POST['cena_pr'];
+                        $product_availability = $_POST['dostepnosc_pr'];
+                        $product_sale = $_POST['promocja_pr'];
+                        $product_id = -1; //gunk ogarnij przekazywanie id
+                        mysqli_change_values($product_sql, array($product_name, $product_price, $product_availability, $product_sale, $product_id), 5);
+                    }
+                ?>
+            </div>
+            <div class="popup card hidden" id="delete_product_confirm"> 
+                <input type="submit" name="product_d_confirm" value="Usuń">
+                <button onclick="//zamknij popupa">Anuluj</button>
+                <?php 
+                    if($isset($_POST['user_d_confirm'])){
+                        $product_del_sql = "DELETE FROM produkt where id = ?";
+                        $product_id = 0;//gunk ogarnij przekazywanie id
+                        mysqli_change_values($product_del_sql, array($product_id), 1);
+                    }
+                ?>
             <?php endif;?>
              <?php 
               if ((isset($_GET['page']) && $_GET['page']=='orders')): 
