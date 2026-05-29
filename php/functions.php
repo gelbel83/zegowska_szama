@@ -10,6 +10,8 @@ $dbusername = 'root';
 $dbpassword = '';
 $charset = 'utf8mb4';
 
+$uploads_dir = "../resources/produkty/";
+
 function mysqli_select_values($query, $values_arr, $parameters_num) {
     global $dbname;
     global $dbhost;

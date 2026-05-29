@@ -126,7 +126,7 @@
                             echo number_format($product['cena'], 2, '.', '') . "zł";
                             echo "<br>";
                             echo "Promocja: ";
-                            echo $product['promocja'] . "%";
+                            echo $product['promocja']*100 . "%";
                             echo "<br>";
                             echo "Dostępność: ";
                             if($product['dostepnosc'] == 1){
@@ -150,6 +150,57 @@
                 ?>
                 </div>
             </div>
+            <div class="popup card hidden" id="product_add_popup"> 
+               
+                <form method="post" action="" enctype="multipart/form-data"> 
+                    <label for="nazwa_pr">Nazwa: </label>
+                    <input type="text" name="nazwa_pr" required> 
+                    <label for="cena_pr">Cena: </label>
+                    <input type="text" name="cena_pr" required>
+                    <label for="dostepnosc_pr">Dostępny: </label>
+                    <input type="checkbox" name="dostepnosc_pr" checked>
+                    <label for="promocja_pr">Promocja (w %): </label>
+                    <input type="number" name="promocja_pr" required>
+                    <label for="kategoria_pr">Kategoria: </label>
+                    <select name = "kategoria_pr" required>
+                        <?php 
+                            $get_cat_sql = "SELECT * FROM kategoria";
+                            $categories = mysqli_select_no_parameters($get_cat_sql);
+                            foreach($categories as $category){
+                                echo "<option value='".$category['id']."'>";
+                                echo $category['nazwa'];
+                                echo "</option>";
+                            }
+                        ?>
+                    </select>
+                    <input type="file" name="plik" required>
+                    <input type="submit" name="add_product" value="Dodaj produkt">
+                </form>
+                <?php 
+                    if(isset($_POST['add_product'])){
+                        $product_sql = "INSERT INTO produkt(nazwa, kategoria_id, cena, dostepnosc, promocja, zdjecie) VALUES (?,?,?,?,?,?)";
+                        $product_name = $_POST['nazwa_pr'];
+                        $product_price = $_POST['cena_pr'];
+                        $product_availability = $_POST['dostepnosc_pr'] == 'on' ? 1 : 0;
+                        $product_sale = $_POST['promocja_pr']/100; 
+                        $product_cat = $_POST['kategoria_pr'];
+
+                        $uploads_dir = "../resources/produkty/";
+                        $file_name = basename($_FILES["plik"]["name"]);
+                        $file_type = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+                        $target_file = $uploads_dir . $file_name;
+
+                        $allowed_types = ['jpg', 'png', 'webp', 'svg', 'gif'];
+                        $max_file_size = 10 * 1024 * 1024; // 10 MB
+
+
+                        if($_FILES["plik"]["error"] == UPLOAD_ERR_OK && in_array($file_type, $allowed_types) && $_FILES["plik"]["size"] < $max_file_size){
+                            move_uploaded_file($_FILES["plik"]["tmp_name"], $target_file);
+                            mysqli_change_values($product_sql, array($product_name, $product_cat, $product_price, $product_availability, $product_sale, $file_name), 6);
+                        }
+                    }
+                ?>
+            </div>
             <div class="popup card hidden" id="product_edit_popup"> 
                 <form method="post" action=""> 
                     <label for="nazwa_pr">Nazwa: </label>
@@ -157,8 +208,8 @@
                     <label for="cena_pr">Cena: </label>
                     <input type="text" name="cena_pr" value="">
                     <label for="dostepnosc_pr">Dostępny: </label>
-                    <input type="checkbox" name="dostepnosc_pr" value="">
-                    <label for="promocja_pr">Promocja: </label>
+                    <input type="checkbox" name="dostepnosc_pr" value="" checked>
+                    <label for="promocja_pr">Promocja (w %): </label>
                     <input type="number" name="promocja_pr" value="">
                     <input type="submit" name="change_product" value="Zapisz">
                 </form>
@@ -167,8 +218,8 @@
                         $product_sql = "UPDATE produkt SET nazwa=?, cena=?, dostepnosc=?, promocja=? WHERE produkt.id = ?;";
                         $product_name = $_POST['nazwa_pr'];
                         $product_price = $_POST['cena_pr'];
-                        $product_availability = $_POST['dostepnosc_pr'];
-                        $product_sale = $_POST['promocja_pr'];
+                        $product_availability = $_POST['dostepnosc_pr'] ?? 0;
+                        $product_sale = $_POST['promocja_pr']/100;
                         $product_id = -1; //gunk ogarnij przekazywanie id
                         mysqli_change_values($product_sql, array($product_name, $product_price, $product_availability, $product_sale, $product_id), 5);
                     }
