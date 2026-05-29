@@ -17,7 +17,7 @@
         <script src="js/scroll.js" defer></script>
     </head>
     
-    <body class="d-flex flex-column">
+    <body class="d-flex flex-column min-vh-100">
         <?php create_header(true)?>
 
         <?php if (isset($_SESSION['user'])): ?>
@@ -95,11 +95,9 @@
                             }
                             echo "<br>";
 
-                            echo "<button class='to-cart-button' id='to-cart-".$product['id_pr']."'>Dodaj do koszyka</button>";
+                            echo "<button class='to-cart-button' data-id='{$product['id_pr']}'>Dodaj do koszyka</button>";
                             
                             echo "</div>";
-                            //ogarnac popupa dla produktu wedlug id
-                            //ogarnac popupa dla usuwania
                         }
                     }
                 ?>

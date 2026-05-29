@@ -1,21 +1,23 @@
 "use strict";
 
-const allProductsButtons = document.querySelectorAll('.to-cart-button');
-sessionStorage.setItem('cart', '');
+if (!sessionStorage.getItem('cart')) {
+    sessionStorage.setItem('cart', JSON.stringify([]));
+}
 
-allProductsButtons.forEach(product => {
-    let product_id = product.id.slice(8);
-    product.addEventListener("click", (e)=>{
+const toCartButtons = document.querySelectorAll('.to-cart-button');
+
+toCartButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
         e.preventDefault();
-        let current_cart = [];
-        try{
-            current_cart = JSON.parse(sessionStorage.getItem('cart'));
-        }
-        catch{
-            
-        }
+        
+        let product_id = button.dataset.id;
+        
+        let current_cart = JSON.parse(sessionStorage.getItem('cart')) || [];
         current_cart.push(product_id);
+        
         sessionStorage.setItem('cart', JSON.stringify(current_cart));
-        console.log(sessionStorage.getItem('cart'));
-    })
+        
+        alert("Dodano do koszyka!"); 
+        console.log("Obecny koszyk:", sessionStorage.getItem('cart'));
+    });
 });
