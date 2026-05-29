@@ -32,25 +32,19 @@ function create_header($is_index = false){
 
     echo "<header class='w-100 d-flex align-items-center justify-content-center my-3'>
             <a href='/'><img src='{$path_dots}/resources/logo.gif' alt='ZEGOWSKA SZAMA' id='logo-image'/></a>
-        </header>
+          </header>
         
-        <nav class='d-flex align-items-center justify-content-end'>";
-            if((isset($_SESSION['user_type']) && $_SESSION['user_type'] == 2)  ){
-            echo "<button id='admin-panel-button' class='btn' onclick='window.location.href =`/admin`'>Panel administratora</button>";
+          <nav class='d-flex align-items-center justify-content-end gap-3 px-3'>";
+            
+            if((isset($_SESSION['user_type']) && $_SESSION['user_type'] == 2)){
+                echo "<button id='admin-panel-button' class='btn orange-button' onclick='window.location.href=`/admin`'>Panel administratora</button>";
             }
-            if (isset($_SESSION['user'])){
-                echo "<a href='/zamowienia' class='nav-link'><i class='bi bi-receipt'></i></a>
-                <a href='/koszyk' class='nav-link'><i class='bi bi-cart'></i></a>";
-            }
-            echo "<a href='";
-            if(isset($_SESSION['user'])) {
-                echo '/konto';
-            }else{
-                echo "javascript:void(0);"; 
-            }
-            echo "' id='konto-link' class='nav-link'><i class='bi bi-person-circle'></i></a>
-            <a href='/' class='nav-link'><i class='bi bi-house'></i></a>
-        </nav>";
+
+            echo "<a href='/zamowienia' id='orders-link' class='nav-link'><i class='bi bi-receipt'></i></a>
+                  <a href='/koszyk' id='cart-link' class='nav-link'><i class='bi bi-cart'></i></a>
+                  <a href='".(isset($_SESSION['user']) ? '/konto' : 'javascript:void(0)')."' id='konto-link' class='nav-link'><i class='bi bi-person-circle'></i></a>
+                  <a href='/' class='nav-link'><i class='bi bi-house'></i></a>
+          </nav>";
 }
 
 function create_footer(){

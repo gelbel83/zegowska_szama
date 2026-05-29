@@ -114,7 +114,7 @@ if (!empty($products)) {
     echo "            </div>";
     echo "        </div>";
     
-    echo "        <button class='btn w-100 py-3 fs-4 fw-bold rounded-3 shadow' style='background-color: #F30; color: white; border: none;'>Złóż zamówienie</button>";
+    echo "        <button class='btn w-100 py-3 fs-4 fw-bold rounded-3 shadow orange-button'>Złóż zamówienie</button>";
     
     echo "      </div>";
     echo "    </div>";
