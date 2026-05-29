@@ -51,7 +51,7 @@ if (!empty($products)) {
         
         $disabledStyle = ($quantity <= 1) ? 'disabled' : '';
         
-        $image_src = (!empty($product['zdjecie'])) ? '../img/' . $product['zdjecie'] : 'https://via.placeholder.com/150x150?text=Insert+Zdjecie';
+        $image_src = (!empty($product['zdjecie'])) ? '/resources/produkty/' . $product['zdjecie'] : 'https://via.placeholder.com/150x150?text=Insert+Zdjecie';
 
         echo "<div class='card mb-3 p-3 border rounded-3 shadow-sm'>";
         echo "  <div class='row align-items-center g-3'>";
