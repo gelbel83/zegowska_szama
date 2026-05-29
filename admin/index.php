@@ -94,7 +94,7 @@
                 <input type="submit" name="user_d_confirm" value="Usuń">
                 <button onclick="//zamknij popupa">Anuluj</button>
                 <?php 
-                    if($isset($_POST['user_d_confirm'])){
+                    if(isset($_POST['user_d_confirm'])){
                         $user_del_sql = "DELETE FROM uzytkownik where id = ?";
                         $user_id = 0;//gunk ogarnij przekazywanie id
                         mysqli_change_values($user_del_sql, array($user_id), 1);
@@ -178,7 +178,7 @@
                 <input type="submit" name="product_d_confirm" value="Usuń">
                 <button onclick="//zamknij popupa">Anuluj</button>
                 <?php 
-                    if($isset($_POST['user_d_confirm'])){
+                    if(isset($_POST['user_d_confirm'])){
                         $product_del_sql = "DELETE FROM produkt where id = ?";
                         $product_id = 0;//gunk ogarnij przekazywanie id
                         mysqli_change_values($product_del_sql, array($product_id), 1);
