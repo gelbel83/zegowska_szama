@@ -150,6 +150,40 @@
                 ?>
                 </div>
             </div>
+            <div class="popup card hidden" id="product_edit_popup"> 
+                <form method="post" action=""> 
+                    <label for="nazwa_pr">Nazwa: </label>
+                    <input type="text" name="nazwa_pr" value=""> <!--value z bazy gunk ogarnij dla każdego inputa-->
+                    <label for="cena_pr">Cena: </label>
+                    <input type="text" name="cena_pr" value="">
+                    <label for="dostepnosc_pr">Dostępny: </label>
+                    <input type="checkbox" name="dostepnosc_pr" value="">
+                    <label for="promocja_pr">Promocja: </label>
+                    <input type="number" name="promocja_pr" value="">
+                    <input type="submit" name="change_product" value="Zapisz">
+                </form>
+                <?php 
+                    if(isset($_POST['change_product'])){
+                        $product_sql = "UPDATE produkt SET nazwa=?, cena=?, dostepnosc=?, promocja=? WHERE produkt.id = ?;";
+                        $product_name = $_POST['nazwa_pr'];
+                        $product_price = $_POST['cena_pr'];
+                        $product_availability = $_POST['dostepnosc_pr'];
+                        $product_sale = $_POST['promocja_pr'];
+                        $product_id = -1; //gunk ogarnij przekazywanie id
+                        mysqli_change_values($product_sql, array($product_name, $product_price, $product_availability, $product_sale, $product_id), 5);
+                    }
+                ?>
+            </div>
+            <div class="popup card hidden" id="delete_product_confirm"> 
+                <input type="submit" name="product_d_confirm" value="Usuń">
+                <button onclick="//zamknij popupa">Anuluj</button>
+                <?php 
+                    if($isset($_POST['user_d_confirm'])){
+                        $product_del_sql = "DELETE FROM produkt where id = ?";
+                        $product_id = 0;//gunk ogarnij przekazywanie id
+                        mysqli_change_values($product_del_sql, array($product_id), 1);
+                    }
+                ?>
             <?php endif;?>
              <?php 
               if ((isset($_GET['page']) && $_GET['page']=='orders')): 
