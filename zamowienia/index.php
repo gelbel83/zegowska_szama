@@ -4,6 +4,43 @@
     require_once(__DIR__ . '/../php/components.php');
 
     $current_user = $_SESSION['user'] ?? '';
+
+    $orders_sql = "SELECT 
+                    zamowienie.id AS z_id, 
+                    zamowienie.data_zamowienia AS z_data, 
+                    zamowienie.cena AS z_cena, 
+                    status.nazwa AS z_status, 
+                    produkt.nazwa AS p_nazwa, 
+                    zawartosc_zamowienia.ilosc AS p_ilosc 
+                 FROM zamowienie 
+                 JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id 
+                 JOIN produkt ON produkt.id = zawartosc_zamowienia.produkt_id 
+                 JOIN status ON status.id = zamowienie.status_id 
+                 JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id 
+                 WHERE zamowienie.status_id < 4 AND uzytkownik.login = ? 
+                 ORDER BY zamowienie.data_zamowienia DESC";
+                
+    $orders_arr = mysqli_select_values($orders_sql, array($current_user), 1);   
+    
+    $grouped_orders = [];
+    if (!empty($orders_arr)) {
+        foreach ($orders_arr as $row) {
+            $id = $row['z_id'];
+            if (!isset($grouped_orders[$id])) {
+                $grouped_orders[$id] = [
+                    'id' => $id,
+                    'data' => $row['z_data'],
+                    'cena' => $row['z_cena'],
+                    'status' => $row['z_status'],
+                    'produkty' => []
+                ];
+            }
+            $grouped_orders[$id]['produkty'][] = [
+                'nazwa' => $row['p_nazwa'],
+                'ilosc' => $row['p_ilosc']
+            ];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,54 +54,18 @@
     <body class="d-flex flex-column min-vh-100 bg-light">
         <?php create_header(); ?>
 
-        <main class="container py-4 flex-grow-1">
-            <div class="row mb-4">
-                <div class="col-12">
-                    <h2 class="fw-bold">Twoje zamówienia</h2>
+        <main class="container py-4 flex-grow-1 d-flex flex-column">
+            
+            <?php if (!empty($grouped_orders)): ?>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h2 class="fw-bold">Twoje zamówienia</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div id="orders_display" class="row"> 
-                <div class="col-12">
-                    <?php 
-                        $orders_sql = "SELECT 
-                                        zamowienie.id AS z_id, 
-                                        zamowienie.data_zamowienia AS z_data, 
-                                        zamowienie.cena AS z_cena, 
-                                        status.nazwa AS z_status, 
-                                        produkt.nazwa AS p_nazwa, 
-                                        zawartosc_zamowienia.ilosc AS p_ilosc 
-                                     FROM zamowienie 
-                                     JOIN zawartosc_zamowienia ON zawartosc_zamowienia.zamowienie_id = zamowienie.id 
-                                     JOIN produkt ON produkt.id = zawartosc_zamowienia.produkt_id 
-                                     JOIN status ON status.id = zamowienie.status_id 
-                                     JOIN uzytkownik ON uzytkownik.id = zamowienie.uzytkownik_id 
-                                     WHERE zamowienie.status_id < 4 AND uzytkownik.login = ? 
-                                     ORDER BY zamowienie.data_zamowienia DESC";
-                        
-                        $orders_arr = mysqli_select_values($orders_sql, array($current_user), 1);   
-                        
-                        $grouped_orders = [];
-                        if (!empty($orders_arr)) {
-                            foreach ($orders_arr as $row) {
-                                $id = $row['z_id'];
-                                if (!isset($grouped_orders[$id])) {
-                                    $grouped_orders[$id] = [
-                                        'id' => $id,
-                                        'data' => $row['z_data'],
-                                        'cena' => $row['z_cena'],
-                                        'status' => $row['z_status'],
-                                        'produkty' => []
-                                    ];
-                                }
-                                $grouped_orders[$id]['produkty'][] = [
-                                    'nazwa' => $row['p_nazwa'],
-                                    'ilosc' => $row['p_ilosc']
-                                ];
-                            }
-                        }
-
-                        if (!empty($grouped_orders)) {
+                <div id="orders_display" class="row"> 
+                    <div class="col-12">
+                        <?php 
                             foreach ($grouped_orders as $order) {
                                 $status_color = 'bg-secondary';
                                 if ($order['status'] == 'Nowe') $status_color = 'bg-primary';
@@ -88,7 +89,7 @@
                                 echo "              <i class='bi bi-chevron-down fs-4 text-muted rotate-icon'></i>";
                                 echo "          </div>";
                                 echo "      </button>";
-                                                                
+                                                                                
                                 echo "      <div class='collapse mt-3' id='orderDetails" . $order['id'] . "'>";
                                 echo "          <div class='card card-body bg-light border-0'>";
                                 echo "              <h6 class='fw-bold mb-3'>Produkty:</h6>";
@@ -108,14 +109,17 @@
                                 echo "  </div>";
                                 echo "</div>";
                             }
-                        } else {
-                            echo "<div class='text-center py-5'>";
-                            echo "  <h3 class='text-muted'>Nie masz jeszcze żadnych zamówień.</h3>";
-                            echo "</div>";
-                        }
-                    ?>
+                        ?>
+                    </div>
                 </div>
-            </div>
+
+            <?php else: ?>
+                <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-center py-5">
+                    <i class="bi bi-receipt text-muted" style="font-size: 5rem;"></i>
+                    <h3 class="text-muted mt-3">Nie masz jeszcze żadnych zamówień.</h3>
+                </div>
+            <?php endif; ?>
+
         </main>
 
         <?php create_footer(); ?>
