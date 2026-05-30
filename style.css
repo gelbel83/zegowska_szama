@@ -1,0 +1,173 @@
+/* główne componenty */
+body {
+    font-family: 'Podkova', sans-serif;
+    background-color: white;
+    color: black;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+nav {
+    gap: 15px;
+    padding: 16px 24px;
+}
+
+nav, footer {
+    background-color: whitesmoke;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+/* logo */
+#logo-image {
+    width: 100%; 
+    max-width: 450px;
+    display: block;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    #logo-image {
+        width: 50vw;
+        max-width: 800px;
+    }
+}
+
+/* przyciski */
+#admin-panel-button {
+    margin-right: auto;
+}
+
+/* Wygląd domyślny */
+.orange-button {
+    background-color: #FF3300;
+    color: white;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    font-weight: 600;
+}
+
+.orange-button:hover {
+    background-color: #FF5C33;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.orange-button:active {
+    background-color: #CC2900 !important;
+    color: white !important;
+    transform: translateY(0);
+    opacity: 1 !important;
+}
+
+.orange-button:focus, 
+.orange-button:focus-visible {
+    color: white;
+    outline: none;
+}
+
+.nav-link {
+    background: transparent;
+    border: none;
+    color: black;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.nav-link:hover {
+    color: #FF3300;
+}
+
+.nav-link i {
+    font-size: 2rem;
+}
+
+/* popupy */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;          
+    max-width: 420px;      
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    z-index: 9999;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #FF3300;
+    box-shadow: 0 0 0 0.25rem rgba(255, 92, 51, 0.25);
+}
+
+.show-popup-text{
+    color: #FF3300;
+    text-decoration: underline;
+    cursor: pointer;
+} 
+
+.show-popup-text:hover {
+    color: #FF5C33;
+}
+
+/* konto */
+.account-info {
+    padding: 10px;
+}
+
+.account-info > *:hover {
+    transform: scale(1.3);
+}
+
+/* admin */
+.admin-nav .btn.active { border-bottom: 3px solid #000; font-weight: bold; }
+.list-card { border: 2px solid #333; border-radius: 10px; margin-bottom: 10px; transition: 0.2s; }
+.btn-wireframe { border: 2px solid #333; border-radius: 8px; color: #333; background: transparent; transition: 0.2s;}
+.btn-wireframe:hover { background: #333; color: white; }
+
+/* szukanie */ 
+
+.no-focus-border:focus {
+    border-color: #ced4da;
+    box-shadow: none;
+}
+    
+.input-group-text {
+    border-color: #ced4da;
+}
+
+.custom-select-border {
+    border: 1px solid #ced4da !important;
+}
+
+.custom-select-border:focus {
+    border-color: #ced4da !important;
+}
+
+/* rozwijanie */
+
+.collapse-trigger {
+    box-shadow: none !important;
+    text-decoration: none;
+}
+.rotate-icon {
+    display: inline-block;
+    transition: transform 0.25s ease-in-out;
+}
+
+.collapse-trigger:not(.collapsed) .rotate-icon {
+    transform: rotate(180deg);
+}
+
+
+/* utils */
+.hidden {
+    display: none;
+}
