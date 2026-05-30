@@ -115,7 +115,7 @@
 
             <?php else: ?>
                 <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-center py-5">
-                    <i class="bi bi-box-seam text-muted" style="font-size: 5rem;"></i>
+                    <i class="bi bi-receipt-cutoff text-muted" style="font-size: 5rem;"></i>
                     <h3 class="mt-3">Nie masz jeszcze żadnych zamówień.</h3>
                 </div>
             <?php endif; ?>
