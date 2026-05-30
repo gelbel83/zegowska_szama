@@ -10,7 +10,7 @@ function create_head_tags($is_index = false) {
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
-        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet' crossorigin='anonymous' />
+        <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet' crossorigin='anonymous' />
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css' />
 
         <link rel='preconnect' href='https://fonts.googleapis.com'>
@@ -19,6 +19,8 @@ function create_head_tags($is_index = false) {
 
         <link rel='stylesheet' href='{$path_dots}/style.css' type='text/css' />
         <link rel='shortcut icon' href='{$path_dots}/resources/favicon.ico' type='image/x-icon' />
+
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' crossorigin='anonymous' defer></script>
     ";
 }
 

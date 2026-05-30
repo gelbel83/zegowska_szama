@@ -142,34 +142,90 @@
 
         <?php create_footer() ?>
 
-        <div id="login-popup" class="popup hidden p-4">
-            <form method="post">
-                <div class="row">
-                    <div class="col-6 form-group m-0 p-1"><label>Login/E-mail</label><input type="text" class="form-control" name="login-email" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>Hasło</label><input type="password" class="form-control" name="passwd" required /></div>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="loginModalLabel">Logowanie</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Login/E-mail</label>
+                                <input type="text" class="form-control" name="login-email" required />
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Hasło</label>
+                                <input type="password" class="form-control" name="passwd" required />
+                            </div>
+                            <div class="mb-3 text-center">
+                                <span>Nie masz konta? <a href="#" class="text-decoration-none fw-bold" style="color: #F30;" id="show-register-popup-span">Zarejestruj się!</a></span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" name="login-button" class="btn w-100 orange-button">Zaloguj</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="m-3"><span>Nie masz konta? <span class="show-popup-text" id="show-register-popup-span">Zarejestruj się!</span></span></div>
-                <div class="d-flex justify-content-center"><button type="submit" name="login-button" class="btn w-75 orange-button">Zaloguj</button></div>
-            </form>
+            </div>
         </div>
        
-        <div id="register-popup" class="popup hidden p-4">
-            <form method="post">
-                <div class="row">
-                    <div class="col-6 form-group m-0 p-1"><label>Login</label><input type="text" class="form-control" name="login" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>E-mail</label><input type="email" class="form-control" name="email" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>Hasło</label><input type="password" class="form-control" name="passwd" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>Powtórz hasło</label><input type="password" class="form-control" name="repeat-passwd" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>Imię</label><input type="text" class="form-control" name="name" required /></div>
-                    <div class="col-6 form-group m-0 p-1"><label>Nazwisko</label><input type="text" class="form-control" name="surname" required /></div>
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="registerModalLabel">Rejestracja</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Login</label>
+                                <input type="text" class="form-control" name="login" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">E-mail</label>
+                                <input type="email" class="form-control" name="email" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Hasło</label>
+                                <input type="password" class="form-control" name="passwd" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Powtórz hasło</label>
+                                <input type="password" class="form-control" name="repeat-passwd" required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Imię</label>
+                                <input type="text" class="form-control" name="name" required />
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Nazwisko</label>
+                                <input type="text" class="form-control" name="surname" required />
+                            </div>
+                            <div class="mb-3 text-center">
+                                <span>Masz już konto? <a href="#" class="text-decoration-none fw-bold" style="color: #F30;" id="show-login-popup-span">Zaloguj się!</a></span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" name="register-button" class="btn w-100 orange-button">Zarejestruj</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="m-3"><span>Masz już konto? <span class="show-popup-text" id="show-login-popup-span">Zaloguj się!</span></span></div>
-                <div class="d-flex justify-content-center"><button type="submit" name="register-button" class="btn w-75 orange-button">Zarejestruj</button></div>
-            </form>
+            </div>
         </div>
 
-        <div id="added-to-cart-popup" class="popup p-4 hidden">
-            <div class="d-flex flex-column justify-content-center align-items-center"><h3>Dodano do koszyka!</h3></div>
+        <div class="modal fade" id="addedToCartModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content text-center p-4">
+                    <div class="modal-body">
+                        <h4 class="mb-3">Dodano do koszyka!</h4>
+                        <button type="button" class="btn btn-sm w-100 orange-button" data-bs-dismiss="modal">Kontynuuj zakupy</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </body>
 </html>

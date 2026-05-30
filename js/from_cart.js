@@ -89,29 +89,33 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json()) 
             .then(data => {
                 if (data.success) {
-                    const popup = document.getElementById('order-success-popup');
+                    const modalElement = document.getElementById('order-success-popup');
                     const orderNumberDisplay = document.getElementById('popup-order-number');
+                    
                     orderNumberDisplay.innerText = data.order_id;
-                    popup.classList.remove('hidden');
+                    
+                    const successModal = new bootstrap.Modal(modalElement);
+                    successModal.show();
 
                     event.target.disabled = false;
                     event.target.innerText = "Złóż zamówienie";
 
-                    const observer = new MutationObserver((mutations) => {
-                        if (popup.classList.contains('hidden')) {
-                            sessionStorage.removeItem('cart');
-                            renderCart(); 
-                            observer.disconnect(); 
-                        }
-                    });
+                    modalElement.addEventListener('hidden.bs.modal', function () {
+                        sessionStorage.removeItem('cart');
+                        renderCart(); 
+                    }, { once: true });
 
-                    observer.observe(popup, { attributes: true, attributeFilter: ['class'] });
                 } else {
                     alert("Wystąpił błąd: " + data.message);
                     event.target.disabled = false;
                     event.target.innerText = "Złóż zamówienie";
                 }
             })
+            .catch(error => {
+                console.error("Błąd sieci:", error);
+                event.target.disabled = false;
+                event.target.innerText = "Złóż zamówienie";
+            });
         }
     });
 });

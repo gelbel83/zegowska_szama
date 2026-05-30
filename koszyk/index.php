@@ -21,12 +21,19 @@
         
         <?php create_footer();?>
 
-        <!--popup-->
-        <div id="order-success-popup" class="popup hidden p-4">
-            <div class="d-flex flex-column align-items-center justify-content-center text-center">
-                <h3>Zamówienie złożone!</h3>
-                <h3>Twój numer zamówienia to:</h3>
-                <h1 id="popup-order-number" class="text-success fw-bold my-3"></h1>
+        <div class="modal fade" id="order-success-popup" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-2">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+                    </div>
+                    <div class="modal-body text-center pb-5">
+                        <h3 class="mb-3 text-success">Zamówienie złożone!</h3>
+                        <h5>Twój numer zamówienia to:</h5>
+                        <h1 id="popup-order-number" class="text-success fw-bold my-4"></h1>
+                        <button type="button" class="btn btn-dark px-5" data-bs-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
