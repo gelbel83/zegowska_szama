@@ -43,6 +43,7 @@
         <script src="./js/popups.js" defer></script>
         <script src="./js/scroll.js" defer></script>
         <script src="./js/to_cart.js" defer></script>
+        <script src="./js/search.js" defer></script>
     </head>
     
     <body class="d-flex flex-column min-vh-100 bg-light">
@@ -90,15 +91,41 @@
         <?php endif; ?>
 
         <section class="container my-4 flex-grow-1">
-            <h2 class="fw-bold mb-4">Co u nas wszamasz?</h2>
+            
             <?php 
                 $categories_sql = "SELECT DISTINCT kategoria.id, kategoria.nazwa FROM kategoria JOIN produkt ON produkt.kategoria_id = kategoria.id ORDER BY kategoria.id DESC;";
                 $categories = mysqli_select_no_parameters($categories_sql);
+            ?>
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <h2 class="fw-bold mb-0">Co u nas wszamasz?</h2>
                 
+                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-md-end w-100" style="max-width: 550px;">
+                    <select id="category-filter" class="form-select shadow-sm custom-select-border" style="min-width: 180px;">
+                        <option value="all">Wszystkie kategorie</option>
+                        <?php
+                            if(!empty($categories)){
+                                foreach($categories as $cat) {
+                                    echo "<option value='cat-{$cat['id']}'>" . htmlspecialchars($cat['nazwa']) . "</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    
+                    <div class="input-group shadow-sm w-100">
+                        <input type="text" id="search-bottom-products" class="form-control no-focus-border border-end-0" placeholder="Szukaj produktu...">
+                        <span class="input-group-text bg-white border-start-0">
+                            <i class="bi bi-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <?php 
                 if(!empty($categories)){
                     foreach($categories as $cat) {
                         $cat_id = (int)$cat['id'];
-                        echo "<div class='category-block mb-5'>";
+                        echo "<div class='category-block mb-5' id='cat-{$cat_id}'>";
                         echo "  <h3 class='text-muted mb-3 fs-4 fw-semibold border-bottom pb-2'>" . htmlspecialchars($cat['nazwa']) . "</h3>";
                         echo "  <div class='row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3'>";
                         

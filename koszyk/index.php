@@ -28,7 +28,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zamknij"></button>
                     </div>
                     <div class="modal-body text-center pb-5">
-                        <h3 class="mb-3 text-success">Zamówienie złożone!</h3>
+                        <h3 class="mb-3">Zamówienie złożone!</h3>
                         <h5>Twój numer zamówienia to:</h5>
                         <h1 id="popup-order-number" class="text-success fw-bold my-4"></h1>
                         <button type="button" class="btn btn-dark px-5" data-bs-dismiss="modal">Zamknij</button>
