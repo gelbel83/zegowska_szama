@@ -12,7 +12,6 @@
         <?php create_head_tags() ?>
 
         <script>const isLoggedIn = <?php echo isset($_SESSION["user"]) ? "true" : "false"; ?>;</script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
     </head>
     
     <body class="d-flex flex-column min-vh-100 bg-light">
@@ -74,22 +73,22 @@
 
                                 echo "<div class='card shadow-sm w-100 mb-3'>";
                                 echo "  <div class='card-body'>";
-                                
-                                echo "      <div class='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-3'>";
+                                echo "      <button class='btn p-0 border-0 bg-transparent w-100 text-start text-reset collapse-trigger collapsed d-flex justify-content-between align-items-center' type='button' data-bs-toggle='collapse' data-bs-target='#orderDetails" . $order['id'] . "' aria-expanded='false' aria-controls='orderDetails" . $order['id'] . "'>";
+                                echo "          <div class='d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center w-100 me-3'>";
+                                echo "              <div>";
+                                echo "                  <h4 class='mb-1 fw-bold'>#" . $order['id'] . "</h4>";
+                                echo "                  <p class='text-muted mb-0'><i class='bi bi-calendar3 me-2'></i>" . $order['data'] . "</p>";
+                                echo "              </div>";
+                                echo "              <div class='mt-2 mt-sm-0 text-start text-sm-end'>";
+                                echo "                  <span class='badge {$status_color} rounded-pill fs-6 mb-1'>" . $order['status'] . "</span>";
+                                echo "                  <h4 class='fw-bold mb-0'>" . number_format($order['cena'], 2, '.', '') . " zł</h4>";
+                                echo "              </div>";
+                                echo "          </div>";
                                 echo "          <div>";
-                                echo "              <h4 class='mb-1 fw-bold'>Zamówienie #" . $order['id'] . "</h4>";
-                                echo "              <p class='text-muted mb-0'><i class='bi bi-calendar3 me-2'></i>" . $order['data'] . "</p>";
+                                echo "              <i class='bi bi-chevron-down fs-4 text-muted rotate-icon'></i>";
                                 echo "          </div>";
-                                echo "          <div class='mt-2 mt-sm-0 text-start text-sm-end'>";
-                                echo "              <span class='badge {$status_color} rounded-pill fs-6 mb-1'>" . $order['status'] . "</span>";
-                                echo "              <h4 class='fw-bold mb-0'>" . number_format($order['cena'], 2, '.', '') . " zł</h4>";
-                                echo "          </div>";
-                                echo "      </div>";
-                                
-                                echo "      <button class='btn orange-button text-white fw-bold w-100' type='button' data-bs-toggle='collapse' data-bs-target='#orderDetails" . $order['id'] . "' aria-expanded='false' aria-controls='orderDetails" . $order['id'] . "'>";
-                                echo "          Szczegóły zamówienia";
                                 echo "      </button>";
-                                
+                                                                
                                 echo "      <div class='collapse mt-3' id='orderDetails" . $order['id'] . "'>";
                                 echo "          <div class='card card-body bg-light border-0'>";
                                 echo "              <h6 class='fw-bold mb-3'>Produkty:</h6>";

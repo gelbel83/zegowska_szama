@@ -228,7 +228,7 @@
             </div>
 
             <div class="modal fade" id="addProductModal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-dark border-2">
                         <div class="modal-header border-0"><h5 class="modal-title fw-bold">Nowy produkt</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                         <form method="post" action="?page=products" enctype="multipart/form-data"> 
@@ -257,7 +257,7 @@
             </div>
 
             <div class="modal fade" id="editProductModal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-dark border-2">
                         <div class="modal-header border-0"><h5 class="modal-title fw-bold">Edytuj produkt</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                         <form method="post" action="?page=products"> 
@@ -307,7 +307,7 @@
                     <div class="row align-items-center">
                         <div class="col-12 col-md-6 d-flex flex-column flex-md-row gap-2 gap-md-5 mb-3 mb-md-0 text-start">
                             <div>
-                                <strong class="fs-5">Nr <?= $order['z_id'] ?></strong><br>
+                                <strong class="fs-5">#<?= $order['z_id'] ?></strong><br>
                                 <small class="text-muted">Zamawiający: <?= htmlspecialchars($order['z_login']) ?></small>
                             </div>
                             <div>
@@ -336,12 +336,12 @@
             </div>
 
             <div class="modal fade" id="editOrderModal" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-dark border-2">
                         <div class="modal-header border-0"><h5 class="modal-title fw-bold">Status zamówienia</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                         <form method="post" action="?page=orders"> 
                             <div class="modal-body text-center">
-                                <h4 class="mb-3">Zamówienie Nr <span id="edit_order_id_display"></span></h4>
+                                <h4 class="mb-3">Zamówienie #<span id="edit_order_id_display"></span></h4>
                                 <input type="hidden" name="order_id" id="edit_order_id_input">
                                 <label class="mb-1">Aktualizuj status:</label>
                                 <select name="status_zam" id="edit_order_status_select" class="form-select border-dark border-2 mb-3" required>

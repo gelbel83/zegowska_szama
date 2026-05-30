@@ -10,7 +10,7 @@ const addedCartModal = addedToCartModalElement ? new bootstrap.Modal(addedToCart
 
 toCartButtons.forEach(button => {
     button.addEventListener("click", (e) => {
-        if (!isLoggedIn) return; // Jeśli użytkownik nie jest zalogowany, popups.js wyświetli modal logowania
+        if (!isLoggedIn) return;
 
         e.preventDefault();
         
@@ -20,7 +20,6 @@ toCartButtons.forEach(button => {
         current_cart.push(product_id);
         sessionStorage.setItem('cart', JSON.stringify(current_cart));
         
-        // Pokaż modal sukcesu z Bootstrapa
         if(addedCartModal) {
             addedCartModal.show();
         }

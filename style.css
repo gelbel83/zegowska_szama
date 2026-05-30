@@ -151,6 +151,22 @@ nav, footer {
     border-color: #ced4da !important;
 }
 
+/* rozwijanie */
+
+.collapse-trigger {
+    box-shadow: none !important;
+    text-decoration: none;
+}
+.rotate-icon {
+    display: inline-block;
+    transition: transform 0.25s ease-in-out;
+}
+
+.collapse-trigger:not(.collapsed) .rotate-icon {
+    transform: rotate(180deg);
+}
+
+
 /* utils */
 .hidden {
     display: none;
